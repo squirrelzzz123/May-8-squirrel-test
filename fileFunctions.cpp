@@ -3,44 +3,73 @@
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <allegro5/allegro_image.h>
+
 
 const int SCREEN_W = 1920;
 const int SCREEN_H = 1080;
 
 int main(){
-al_init();
-al_init_primitives_addon();
-al_install_mouse();
+    al_init();
+    al_init_primitives_addon();
+    al_install_mouse();
 
-ALLEGRO_DISPLAY *display = nullptr;
-display = al_create_display(SCREEN_W, SCREEN_H);
-al_set_window_title(display, "mouse test");
+    ALLEGRO_DISPLAY *display = nullptr;
+    display = al_create_display(SCREEN_W, SCREEN_H);
+    al_set_window_title(display, "mouse test");
 
-ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-bool select = false;
+    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
+    bool select = false;
 
-event_queue = al_create_event_queue();
-al_register_event_source(event_queue, al_get_mouse_event_source());
+    event_queue = al_create_event_queue();
+    al_register_event_source(event_queue, al_get_mouse_event_source());
 
-al_clear_to_color(al_map_rgb(0, 0, 0));\
-al_draw_rectangle(500, 500, 800, 800,al_map_rgb(200, 200, 0) , 10);
-al_flip_display();
+    al_clear_to_color(al_map_rgb(0, 0, 0));\
+    al_draw_rectangle(90, 90, 200, 200,al_map_rgb(200, 200, 0) , 10);
+    al_flip_display();
+
+    	// Initialize image add on
+ 	if (!al_init_image_addon()) {
+    	al_show_native_message_box(display, "Error", "Error",
+    		"Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+    	return -1;
+	}
+
+	// Declare a BITMAP called image, setting it's initial value to nullptr
+	ALLEGRO_BITMAP *image = nullptr;
+
+	// Load the bitmap into the Bitmap structure
+	// image file must be in same directory.
+	// Particularly check return code of this type of function that will fail if file not found.
+	image = al_load_bitmap("rainbow2.bmp");
+  	if (!image) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+      	al_destroy_display(display);
+     	return -1;
+	 }
+
+	// Display picture started at top left corner
+	al_draw_bitmap(image, 120, 120, 0);
+
+	// write display to screen
+	al_flip_display();
+
+	  while(!select){
+        ALLEGRO_EVENT ev;
+        al_wait_for_event(event_queue, &ev);
+        if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+        printf("Hooray!(%d, %d)", ev.mouse.x, ev.mouse.y);
+        select = true;
+    }
+        else if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200)
+        printf("(%d, %d)", ev.mouse.x, ev.mouse.y);
+    }
 
 
-while(!select){
-ALLEGRO_EVENT ev;
-al_wait_for_event(event_queue, &ev);
-if(ev.mouse.x >= 500 && ev.mouse.y >= 500 && ev.mouse.x <= 800 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-printf("Hooray!(%d, %d)", ev.mouse.x, ev.mouse.y);
-select = true;
-}
-else if(ev.mouse.x >= 500 && ev.mouse.y >= 500 && ev.mouse.x <= 800 && ev.mouse.y <= 800)
-printf("(%d, %d)", ev.mouse.x, ev.mouse.y);
-}
 
 return 0;
 }
-
 
 
 
