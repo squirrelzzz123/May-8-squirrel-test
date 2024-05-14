@@ -1,9 +1,11 @@
-//This code checks whether the mouse is within the bounds of the yellow square that has been drawn and checks whether it has been clicked
 #include <allegro5/allegro.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_image.h>
+
+// Prototype
+void printImage (int x, int y);
 
 
 const int SCREEN_W = 1920;
@@ -35,40 +37,42 @@ int main(){
     	return -1;
 	}
 
-	// Declare a BITMAP called image, setting it's initial value to nullptr
-	ALLEGRO_BITMAP *image = nullptr;
+   printImage (120, 120);
 
-	// Load the bitmap into the Bitmap structure
-	// image file must be in same directory.
-	// Particularly check return code of this type of function that will fail if file not found.
-	image = al_load_bitmap("rainbow2.bmp");
-  	if (!image) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
-                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-      	al_destroy_display(display);
-     	return -1;
-	 }
-
-	// Display picture started at top left corner
-	al_draw_bitmap(image, 120, 120, 0);
-
-	// write display to screen
-	al_flip_display();
-
-	  while(!select){
+    while(!select){
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
         if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
         printf("Hooray!(%d, %d)", ev.mouse.x, ev.mouse.y);
-        select = true;
-    }
-        else if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200)
+        printImage (900, 500);
+
+    } else if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200)
         printf("(%d, %d)", ev.mouse.x, ev.mouse.y);
     }
 
 
 
 return 0;
+}
+
+
+void printImage (int x, int y){
+
+    ALLEGRO_DISPLAY *display = nullptr;
+    ALLEGRO_BITMAP *image = nullptr;
+
+	image = al_load_bitmap("rainbow2.bmp");
+  	if (!image) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+      	al_destroy_display(display);
+	 }
+
+	al_draw_bitmap(image, x, y, 0);
+
+	// write display to screen
+	al_flip_display();
+
 }
 
 
