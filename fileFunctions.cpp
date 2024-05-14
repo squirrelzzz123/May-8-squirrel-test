@@ -4,53 +4,59 @@
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_image.h>
 
-// Prototype
+// Prototypes
 void printImage (int x, int y);
 
-
+// Define screen size
 const int SCREEN_W = 1920;
 const int SCREEN_H = 1080;
 
 int main(){
+
+    // initialize Allegro and mouse functions
     al_init();
     al_init_primitives_addon();
     al_install_mouse();
 
+   // Initialize display
     ALLEGRO_DISPLAY *display = nullptr;
     display = al_create_display(SCREEN_W, SCREEN_H);
-    al_set_window_title(display, "mouse test");
+    al_set_window_title(display, "Squirrel Game");
 
+    // Initialize event queue
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
     bool select = false;
-
     event_queue = al_create_event_queue();
     al_register_event_source(event_queue, al_get_mouse_event_source());
 
+    // create rectangle
     al_clear_to_color(al_map_rgb(0, 0, 0));\
+    // set spot and colour
     al_draw_rectangle(90, 90, 200, 200,al_map_rgb(200, 200, 0) , 10);
+    // flip display to show image
     al_flip_display();
 
-    	// Initialize image add on
+    // Initialize image add on
  	if (!al_init_image_addon()) {
-    	al_show_native_message_box(display, "Error", "Error",
-    		"Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+    	// error message
+    	al_show_native_message_box(display, "Error", "Error", "Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
     	return -1;
 	}
 
-   printImage (120, 120);
+    // print image - give variables
+    printImage (115, 120);
 
+    // create peramiters 
     while(!select){
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
         if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
         printf("Hooray!(%d, %d)", ev.mouse.x, ev.mouse.y);
-        printImage (900, 500);
+        printImage (910, 500);
 
     } else if(ev.mouse.x >= 90 && ev.mouse.y >= 90 && ev.mouse.x <= 200 && ev.mouse.y <= 200)
         printf("(%d, %d)", ev.mouse.x, ev.mouse.y);
     }
-
-
 
 return 0;
 }
@@ -58,22 +64,27 @@ return 0;
 
 void printImage (int x, int y){
 
+    // declare and initialize image and display
     ALLEGRO_DISPLAY *display = nullptr;
     ALLEGRO_BITMAP *image = nullptr;
 
+	// assign file to image
 	image = al_load_bitmap("rainbow2.bmp");
+  	
+  	// error message
   	if (!image) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to load image!",
-                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
       	al_destroy_display(display);
 	 }
 
+	// print image based on coordinates given
 	al_draw_bitmap(image, x, y, 0);
 
 	// write display to screen
 	al_flip_display();
 
 }
+
 
 
 
