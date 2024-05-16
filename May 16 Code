@@ -186,7 +186,7 @@ int getScore(int &total){
 
 int printScore(int total){
            // load the specific font you want
-       printImage(1000-300, 1000-400, 3);
+       printImage(1920-150, 60, 3);
        ALLEGRO_FONT *font = al_load_ttf_font("comic.ttf", 50, 0);
        if (!font){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
@@ -195,9 +195,9 @@ int printScore(int total){
        }
         char str[10];
         sprintf(str, "%d", total);
-       al_draw_text(font, COLOUR, 300, 300, ALLEGRO_ALIGN_CENTRE, "Score");
+       al_draw_text(font, COLOUR, 1920-100, 0, ALLEGRO_ALIGN_CENTRE, "Score");
        //char score[10] = "total";
-       al_draw_text(font, COLOUR, 300, 360, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, 1920-100, 50, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 
 }
