@@ -106,3 +106,23 @@ void displayRectangles (){
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 870 && ev.mouse.x <= 1815 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP);
 
     }
+
+
+ // text
+       al_init_font_addon(); // initialize the font addon
+       al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("comic.ttf", 50, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
+                                        nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+
+       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+
+       al_flip_display();
