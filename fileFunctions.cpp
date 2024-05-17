@@ -1,3 +1,4 @@
+
 #include <allegro5/allegro.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
@@ -129,7 +130,6 @@ int main(){
 
 
     // text
-
        al_init_font_addon(); // initialize the font addon
        al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
@@ -142,6 +142,10 @@ int main(){
        }
 
        al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+
        al_flip_display();
 
 /*
