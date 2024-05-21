@@ -37,7 +37,7 @@ void printImage (int x, int y, int file);
 void displayRectangles ();
 int getScore(int &total, int value);
 int printScore(int total);
-void clothingArrays(Pants a[], Shirt b[], Shoes c[], Accessories d[]);
+void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]);
 
 // Define screen size
 const int SCREEN_W = 1920;
@@ -108,8 +108,11 @@ int main(){
                                         nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
-
        al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+
        al_flip_display();
 
 // MOUSE FUNCTIONS AND RECTANGLE
@@ -309,57 +312,57 @@ void displayRectangles (){
     al_flip_display();
 }
 
-void clothingArrays(Pants a[], Shirt b[], Shoes c[], Accessories d[]){
+void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     //array for shirts
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            b[i].value = 30;
+            s[i].value = 30;
         if(i == 1)
-            b[i].value = 55;
+            s[i].value = 55;
         if(i == 2)
-            b[i].value = 77;
+            s[i].value = 77;
         if(i == 3)
-            b[i].value = 66;
+            s[i].value = 66;
         if(i == 4)
-            b[i].value = 99;
+            s[i].value = 99;
     }
     //array for shoes
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            c[i].value = 1;
+            sh[i].value = 1;
         if(i == 1)
-            c[i].value = 2;
+            sh[i].value = 2;
         if(i == 2)
-            c[i].value = 3;
+            sh[i].value = 3;
         if(i == 3)
-            c[i].value = 4;
+            sh[i].value = 4;
         if(i == 4)
-            c[i].value = 5;
+            sh[i].value = 5;
     }
     //array for pants
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            a[i].value = 6;
+            p[i].value = 6;
         if(i == 1)
-            a[i].value = 7;
+            p[i].value = 7;
         if(i == 2)
-            a[i].value = 8;
+            p[i].value = 8;
         if(i == 3)
-            a[i].value = 9;
+            p[i].value = 9;
         if(i == 4)
-            a[i].value = 10;
+            p[i].value = 10;
     }
     //array for accessories
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            d[i].value = 11;
+            ac[i].value = 11;
         if(i == 1)
-            d[i].value = 12;
+            ac[i].value = 12;
         if(i == 2)
-            d[i].value = 13;
+            ac[i].value = 13;
         if(i == 3)
-            d[i].value = 14;
+            ac[i].value = 14;
         if(i == 4)
-            d[i].value = 15;
+            ac[i].value = 15;
     }
 }
