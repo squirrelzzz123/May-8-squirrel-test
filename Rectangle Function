@@ -1,42 +1,24 @@
-// rectangle function
-
-
+// rectangle function (increase by 180)
 void displayRectangles (){
 
     // For shirts
-    al_draw_rectangle(90, 150, 200, 260,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(90, 330, 200, 440,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(90, 510, 200, 620,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(90, 690, 200, 800,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(90, 870, 200, 980,al_map_rgb(200, 200, 0) , 10);
-
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 10);
+    }
     // For pants
-    al_draw_rectangle(265, 150, 375, 260,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(265, 330, 375, 440,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(265, 510, 375, 620,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(265, 690, 375, 800,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(265, 870, 375, 980,al_map_rgb(200, 200, 0) , 10);
-
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 10);
+    }
     // For shoes
-    al_draw_rectangle(1530, 150, 1640, 260,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1530, 330, 1640, 440,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1530, 510, 1640, 620,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1530, 690, 1640, 800,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1530, 870, 1640, 980,al_map_rgb(200, 200, 0) , 10);
-
-    // For others
-    // For pants
-    al_draw_rectangle(1705, 150, 1815, 260,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1705, 330, 1815, 440,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1705, 510, 1815, 620,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1705, 690, 1815, 800,al_map_rgb(200, 200, 0) , 10);
-    al_draw_rectangle(1705, 870, 1815, 980,al_map_rgb(200, 200, 0) , 10);
-
-
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 10);
+    }
+    // For Accessories
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 10);
+    }
     al_flip_display();
-
 }
-
 
 // mouse function
 
