@@ -10,6 +10,10 @@
 
 int main(){
     int totalScore = 0;
+    bool shirtClicked = false;
+    bool pantsClicked = false;
+    bool shoesClicked = false;
+    bool accClicked = false;
     Squirrel mainSquirrel;
     mainSquirrel.sPants.value = 0;
     mainSquirrel.sShirt.value = 0;
@@ -86,121 +90,167 @@ int main(){
         al_wait_for_event(event_queue, &ev);
         // column 1 Shirt
         if(ev.mouse.x >= 90 && ev.mouse.y >= 150 && ev.mouse.x <= 200 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (910, 500, 1);
-            mainSquirrel.sShirt = arrShirts[0];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sShirt.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shirtClicked){
+                printImage (910, 500, 1);
+                mainSquirrel.sShirt = arrShirts[0];
+                shirtClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 330 && ev.mouse.x <= 200 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sShirt = arrShirts[1];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sShirt.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shirtClicked){
+                printImage (720, 500, 2);
+                mainSquirrel.sShirt = arrShirts[1];
+                shirtClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 510 && ev.mouse.x <= 200 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sShirt = arrShirts[2];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sShirt.value, arrPants, arrShirts, arrShoes, arrAcc));
+
+            if(!shirtClicked){
+                printImage (740, 500, 2);
+                mainSquirrel.sShirt = arrShirts[2];
+                shirtClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 690 && ev.mouse.x <= 200 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sShirt = arrShirts[3];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sShirt.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shirtClicked){
+                printImage (760, 500, 2);
+                mainSquirrel.sShirt = arrShirts[3];
+                shirtClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 870 && ev.mouse.x <= 200 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sShirt = arrShirts[4];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sShirt.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shirtClicked){
+                printImage (780, 500, 2);
+                mainSquirrel.sShirt = arrShirts[5];
+                shirtClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         // column 2 Pants
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 150 && ev.mouse.x <= 375 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (850, 500, 2);
-            mainSquirrel.sPants = arrPants[0];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sPants.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!pantsClicked){
+                printImage (850, 500, 2);
+                mainSquirrel.sPants = arrPants[0];
+                pantsClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 330 && ev.mouse.x <= 375 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sPants = arrPants[1];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sPants.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!pantsClicked){
+                printImage (700, 500, 2);
+                mainSquirrel.sPants = arrPants[1];
+                pantsClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 510 && ev.mouse.x <= 375 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (750, 500, 2);
-            mainSquirrel.sPants = arrPants[2];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sPants.value, arrPants, arrShirts, arrShoes, arrAcc));
-
+            if(!pantsClicked){
+                printImage (750, 500, 2);
+                mainSquirrel.sPants = arrPants[2];
+                pantsClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 690 && ev.mouse.x <= 375 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sPants = arrPants[3];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sPants.value, arrPants, arrShirts, arrShoes, arrAcc));
-
+            if(!pantsClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sPants = arrPants[3];
+                pantsClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 870 && ev.mouse.x <= 375 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sPants = arrPants[4];
-            arrShirts[0].select = true;
-            printScore(getScore(totalScore, mainSquirrel.sPants.value, arrPants, arrShirts, arrShoes, arrAcc));
-
+            if(!pantsClicked){
+                printImage (820, 500, 2);
+                mainSquirrel.sPants = arrPants[4];
+                pantsClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
         // column 3 Shoes
         }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 150 && ev.mouse.x <= 1640 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (850, 500, 2);
-            mainSquirrel.sShoes = arrShoes[0];
-            printScore(getScore(totalScore, mainSquirrel.sShoes.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shoesClicked){
+                printImage (870, 500, 2);
+                mainSquirrel.sShoes = arrShoes[0];
+                shoesClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 330 && ev.mouse.x <= 1640 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (700, 500, 2);
-            mainSquirrel.sShoes = arrShoes[1];
-            printScore(getScore(totalScore, mainSquirrel.sShoes.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shoesClicked){
+                printImage (700, 500, 2);
+                mainSquirrel.sShoes = arrShoes[1];
+                shoesClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 510 && ev.mouse.x <= 1640 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (750, 500, 2);
-            mainSquirrel.sShoes = arrShoes[2];
-            printScore(getScore(totalScore, mainSquirrel.sShoes.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shoesClicked){
+                printImage (750, 500, 2);
+                mainSquirrel.sShoes = arrShoes[2];
+                shoesClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 690 && ev.mouse.x <= 1640 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sShoes = arrShoes[3];
-            printScore(getScore(totalScore, mainSquirrel.sShoes.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shoesClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sShoes = arrShoes[3];
+                shoesClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 870 && ev.mouse.x <= 1640 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sShoes = arrShoes[4];
-            printScore(getScore(totalScore, mainSquirrel.sShoes.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!shoesClicked){
+                printImage (830, 500, 2);
+                mainSquirrel.sShoes = arrShoes[4];
+                shoesClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         // column 4 Accessories
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 150 && ev.mouse.x <= 1815 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sAcc = arrAcc[0];
-            printScore(getScore(totalScore, mainSquirrel.sAcc.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!accClicked){
+                printImage (830, 500, 2);
+                mainSquirrel.sAcc = arrAcc[0];
+                accClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 330 && ev.mouse.x <= 1815 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sAcc = arrAcc[1];
-            printScore(getScore(totalScore, mainSquirrel.sAcc.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!accClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sAcc = arrAcc[1];
+                accClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 510 && ev.mouse.x <= 1815 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sAcc = arrAcc[2];
-            printScore(getScore(totalScore, mainSquirrel.sAcc.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!accClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sAcc = arrAcc[2];
+                accClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 690 && ev.mouse.x <= 1815 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sAcc = arrAcc[3];
-            printScore(getScore(totalScore, mainSquirrel.sAcc.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!accClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sAcc = arrAcc[3];
+                accClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
 
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 870 && ev.mouse.x <= 1815 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (800, 500, 2);
-            mainSquirrel.sAcc = arrAcc[4];
-            printScore(getScore(totalScore, mainSquirrel.sAcc.value, arrPants, arrShirts, arrShoes, arrAcc));
+            if(!accClicked){
+                printImage (800, 500, 2);
+                mainSquirrel.sAcc = arrAcc[4];
+                accClicked = true;
+                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            }
         }
     }
 
     return 0;
 }
-
-
