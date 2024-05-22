@@ -35,3 +35,5 @@ void displayRectangles ();
 int addScore(int &total, int shirt, int pants, int shoes, int acc);
 int printScore(int total);
 void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]);
+void loadClothing();
+int loadText();
