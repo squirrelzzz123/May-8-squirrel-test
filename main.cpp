@@ -25,7 +25,7 @@ int main(){
     Shoes arrShoes[5];
     Pants arrPants[5];
     Accessories arrAcc[5];
-    
+
     //Sets the points for each clothing piece
     clothingArrays(arrPants, arrShirts, arrShoes, arrAcc);
 
@@ -51,13 +51,16 @@ int main(){
     	al_show_native_message_box(display, "Error", "Error", "Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
     	return -1;
 	}
-	
+
     //load clothing into the boxes
     loadClothing();
     //display rectangles onto screen
     displayRectangles ();
     al_flip_display();
     loadText();
+    //prints out initial score of 0
+    printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+
 
 // MOUSE FUNCTIONS AND RECTANGLE
     while(!select){
@@ -208,7 +211,13 @@ int main(){
                 accClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
+        }//restart rectangle code
+        else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+            printImage (850, 500, 2);
+            printf("yadadadsyayyay");
+            printf("(%d, %d)", ev.mouse.x, ev.mouse.y);
         }
+
     }
     return 0;
 }
