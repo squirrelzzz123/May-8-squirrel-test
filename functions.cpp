@@ -40,19 +40,8 @@ void printImage (int x, int y, int file){
 	al_flip_display();
 }
 
-int getScore(int &total, int value, Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
-    int shirtScore = 0;
-    int pantsScore = 0;
-    int shoesScore = 0;
-    int accScore = 0;
-    bool ShirtSelected;
-    bool ShoeSelected;
-    bool AccSelected;
-    bool PantsSelected;
-    for(int i = 0; i < 5; i++){
-        if()
-    }
-    total = shirtScore + pantsScore + shoesScore + accScore;
+int addScore(int &total, int shirt, int pants, int shoes, int acc){
+    total = shirt + pants + shoes + acc;
     return total;
 }
 
