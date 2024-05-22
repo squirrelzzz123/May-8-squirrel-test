@@ -25,7 +25,7 @@ int loadText(){
        al_init_ttf_addon();// initialize the ttf (True Type Font) addon
 
        // load the specific font you want
-       ALLEGRO_FONT *font = al_load_ttf_font("comic.ttf", 50, 0);
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
        if (!font){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
                                         nullptr, ALLEGRO_MESSAGEBOX_ERROR);
@@ -51,10 +51,10 @@ void printImage (int x, int y, int file){
 	} else if (file == 2){
         image = al_load_bitmap("redshirt.png");
     } else if (file == 3){
-        image = al_load_bitmap("whiteSquare.jpg");
+        image = al_load_bitmap("yellowsquare.png");
     } else if (file == 4){
         image = al_load_bitmap("background.png");
-    }
+    }  
 
   	// error message
   	if (!image) {
@@ -77,10 +77,12 @@ int addScore(int &total, int shirt, int pants, int shoes, int acc){
 }
 
 //prints out the score to the screen
+//superLarky.ttf
+//comic.ttf
 int printScore(int total){
            // load the specific font you want
-       printImage(1920-150, 60, 3);
-       ALLEGRO_FONT *font = al_load_ttf_font("comic.ttf", 50, 0);
+       printImage(1920/2-410, 25, 3);
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
        if (!font){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
                                         nullptr, ALLEGRO_MESSAGEBOX_ERROR);
@@ -88,9 +90,10 @@ int printScore(int total){
        }
         char str[10];
         sprintf(str, "%d", total);
-       al_draw_text(font, COLOUR, 1920-100, 0, ALLEGRO_ALIGN_CENTRE, "Score");
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
        //char score[10] = "total";
-       al_draw_text(font, COLOUR, 1920-100, 50, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, 1920/2-200, 70, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 }
 
@@ -99,20 +102,22 @@ void displayRectangles (){
 
     // For shirts
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 10);
+        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For pants
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 10);
+        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For shoes
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 10);
+        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
     // For Accessories
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 10);
+        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
+    //restart rectangle
+    al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
     al_flip_display();
 
 }
