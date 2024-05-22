@@ -10,6 +10,35 @@
 
 ALLEGRO_DISPLAY *display = nullptr;
 
+void loadClothing(){
+    printImage (0, 0, 4);
+    printImage (113, 180, 1);
+    printImage (95, 335, 2);
+    printImage (95, 515, 2);
+    printImage (113, 720, 1);
+    printImage (113, 900, 1);
+}
+
+int loadText(){
+        // text
+       al_init_font_addon(); // initialize the font addon
+       al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("comic.ttf", 50, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
+                                        nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+
+       al_flip_display();
+}
+
 void printImage (int x, int y, int file){
 
     // declare and initialize image and display
@@ -40,11 +69,14 @@ void printImage (int x, int y, int file){
 	al_flip_display();
 }
 
+//calculates the score that is achieved by the player
 int addScore(int &total, int shirt, int pants, int shoes, int acc){
     total = shirt + pants + shoes + acc;
+
     return total;
 }
 
+//prints out the score to the screen
 int printScore(int total){
            // load the specific font you want
        printImage(1920-150, 60, 3);
