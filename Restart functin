@@ -1,0 +1,9 @@
+if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+            printf ("yay");
+            loadGraphics();
+            displayRectangles();
+            shirtClicked = false;
+            pantsClicked = false;
+            shoesClicked = false;
+            accClicked = false;
+            totalScore = 0;
