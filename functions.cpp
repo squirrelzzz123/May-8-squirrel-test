@@ -10,7 +10,8 @@
 
 ALLEGRO_DISPLAY *display = nullptr;
 
-void loadClothing(){
+//loads pictures and background onto display
+void loadGraphics(){
     printImage (0, 0, 4);
     printImage (113, 180, 1);
     printImage (95, 335, 2);
@@ -54,7 +55,7 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("yellowsquare.png");
     } else if (file == 4){
         image = al_load_bitmap("background.png");
-    }  
+    }
 
   	// error message
   	if (!image) {
@@ -126,53 +127,53 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     //array for shirts
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            s[i].value = 30;
+            s[i].value = 5;
         if(i == 1)
-            s[i].value = 55;
+            s[i].value = 100;
         if(i == 2)
-            s[i].value = 77;
+            s[i].value = 4;
         if(i == 3)
-            s[i].value = 66;
+            s[i].value = 12;
         if(i == 4)
-            s[i].value = 99;
+            s[i].value = 55;
     }
     //array for shoes
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            sh[i].value = 1;
-        if(i == 1)
-            sh[i].value = 2;
-        if(i == 2)
             sh[i].value = 3;
+        if(i == 1)
+            sh[i].value = 88;
+        if(i == 2)
+            sh[i].value = 77;
         if(i == 3)
-            sh[i].value = 4;
+            sh[i].value = 13;
         if(i == 4)
-            sh[i].value = 5;
+            sh[i].value = 10;
     }
     //array for pants
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            p[i].value = 6;
+            p[i].value = 90;
         if(i == 1)
-            p[i].value = 7;
+            p[i].value = 34;
         if(i == 2)
-            p[i].value = 8;
+            p[i].value = 24;
         if(i == 3)
-            p[i].value = 9;
-        if(i == 4)
             p[i].value = 10;
+        if(i == 4)
+            p[i].value = 78;
     }
     //array for accessories
     for(int i = 0; i < 5; i++){
         if(i == 0)
-            ac[i].value = 11;
+            ac[i].value = 1;
         if(i == 1)
-            ac[i].value = 12;
+            ac[i].value = 36;
         if(i == 2)
-            ac[i].value = 13;
+            ac[i].value = 28;
         if(i == 3)
-            ac[i].value = 14;
+            ac[i].value = 48;
         if(i == 4)
-            ac[i].value = 15;
+            ac[i].value = 58;
     }
 }
