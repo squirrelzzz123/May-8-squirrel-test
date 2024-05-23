@@ -1,3 +1,4 @@
+
 #include <allegro5/allegro.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
@@ -12,6 +13,7 @@
 int main(){
     //Declare and initialize variables
     int totalScore = 0;
+    int highScore = 0;
     bool shirtClicked = false;
     bool pantsClicked = false;
     bool shoesClicked = false;
@@ -60,12 +62,15 @@ int main(){
     loadText();
     //prints out initial score of 0
     printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+    //prints out initial high score of 0
+    printHighScore(highScore);
 
 
 // MOUSE FUNCTIONS AND RECTANGLE
     while(!select){
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
+
         // column 1 Shirt
         if(ev.mouse.x >= 90 && ev.mouse.y >= 150 && ev.mouse.x <= 200 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
@@ -73,6 +78,7 @@ int main(){
                 mainSquirrel.sShirt = arrShirts[0];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+                scoreCheck (totalScore);
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 330 && ev.mouse.x <= 200 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
@@ -110,6 +116,7 @@ int main(){
                 mainSquirrel.sPants = arrPants[0];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+                scoreCheck (totalScore);
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 330 && ev.mouse.x <= 375 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
@@ -227,7 +234,8 @@ int main(){
             printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             displayRectangles();
         }
-
     }
+
+
     return 0;
 }
