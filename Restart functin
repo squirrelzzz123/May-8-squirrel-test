@@ -7,3 +7,30 @@ if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <=
             shoesClicked = false;
             accClicked = false;
             totalScore = 0;
+
+
+//prints out the score to the screen
+//superLarky.ttf
+//comic.ttf
+int printScore(int total){
+        //print images of rectangles for the scores
+       printImage(1920/2-410, 25, 3);
+       printImage(1920/2-123, 25, 3);
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
+                                        nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       //print current score
+       char str[10];
+        sprintf(str, "%d", total);
+       al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+       //print highest score
+       al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_flip_display();
+}
