@@ -1,3 +1,4 @@
+
 //Header File
 
 // Define screen size
@@ -35,5 +36,8 @@ void displayRectangles ();
 int addScore(int &total, int shirt, int pants, int shoes, int acc);
 int printScore(int total);
 void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]);
-void loadClothing();
+void loadGraphics();
 int loadText();
+int scoreCheck (int highScore);
+int printHighScore(int high);
+
