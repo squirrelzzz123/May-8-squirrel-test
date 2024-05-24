@@ -1,4 +1,4 @@
-
+//Nina Tseng and Alyssa Shen
 //Header File
 
 // Define screen size
@@ -38,6 +38,7 @@ int printScore(int total);
 void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]);
 void loadGraphics();
 int loadText();
-int scoreCheck (int highScore);
 int printHighScore(int high);
-
+int printIntoFile(int &highScore);
+int returnHighScore(int &highScore, int current);
+int scoreCheck (int highScore);
