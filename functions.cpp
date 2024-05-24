@@ -31,8 +31,7 @@ int loadText(){
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
        if (!font){
-          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
-                                        nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          al_show_native_message_box(display, "Error", "Error", "Could not load superLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
        al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
@@ -187,7 +186,7 @@ void displayRectangles (){
     for (int i = 0; i < 5; i ++){
         al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
-    //restart rectangle
+    //restart rectangle - delete at the end :)
     al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
     al_flip_display();
 
@@ -196,8 +195,6 @@ void displayRectangles (){
 //calculates the score that is achieved by the player
 int addScore(int &total, int shirt, int pants, int shoes, int acc){
     total = shirt + pants + shoes + acc;
-    if()
-
     return total;
 }
 
@@ -255,3 +252,20 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
             ac[i].value = 58;
     }
 }
+
+void printHint (int score){
+    if (score < 75){
+        // text
+       al_init_font_addon(); // initialize the font addon
+       al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load superLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+       }
+       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "I don't like the colour yellow :(");
+    }
+}
+
+
