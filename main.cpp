@@ -1,4 +1,4 @@
-
+//Nina Tseng and Alyssa Shen
 #include <allegro5/allegro.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
@@ -78,7 +78,6 @@ int main(){
                 mainSquirrel.sShirt = arrShirts[0];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-                scoreCheck (totalScore);
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 330 && ev.mouse.x <= 200 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
@@ -116,7 +115,6 @@ int main(){
                 mainSquirrel.sPants = arrPants[0];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-                scoreCheck (totalScore);
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 330 && ev.mouse.x <= 375 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
@@ -230,12 +228,15 @@ int main(){
             mainSquirrel.sShoes.value = 0;
             printf ("yay");
             loadGraphics();
+            printHighScore(returnHighScore(highScore, totalScore));
+            //scoreCheck (highScore);
+            //prints highscore into file
+            printIntoFile(highScore);
+            FILE *fptr;
             totalScore = 0;
             printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             displayRectangles();
         }
     }
-
-
     return 0;
 }
