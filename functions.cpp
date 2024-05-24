@@ -1,3 +1,4 @@
+//Nina Tseng and Alyssa Shen
 #include <allegro5/allegro.h>
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
@@ -74,13 +75,6 @@ void printImage (int x, int y, int file){
 	al_flip_display();
 }
 
-//calculates the score that is achieved by the player
-int addScore(int &total, int shirt, int pants, int shoes, int acc){
-    total = shirt + pants + shoes + acc;
-
-    return total;
-}
-
 //prints out the score to the screen
 //superLarky.ttf
 //comic.ttf
@@ -131,12 +125,23 @@ int printHighScore(int high){
        al_flip_display();
 }
 
+int returnHighScore(int &highScore, int current){
+    if(current > highScore){
+        highScore = current;
+        return highScore;
+    }else{
+        return highScore;
+    }
+}
+//delete if not needed THIS FUNCTION IS NOT CALLED
 //saves the highest score into the textfile
 int scoreCheck (int highScore){
     // initialize and open file variable
     FILE * fptr;
     int score2;
     fptr = fopen("scoreCheck.txt", "r");
+    fscanf(fptr, "%d", score2);
+    //printf("%d", score2);
 
     // error message
     if (fptr == nullptr) {
@@ -150,8 +155,17 @@ int scoreCheck (int highScore){
         score2 = highScore;
         printf ("gottem");
     }
-    printf("%d ", score2);
-    return score2;
+    fclose(fptr);
+
+    //printf("%d ", score2);
+    //return score2;
+}
+
+int printIntoFile(int &highScore){
+    FILE *fptr;
+    fptr = fopen("scoreCheck.txt", "w");
+    fprintf(fptr, "%d", highScore);
+    fclose(fptr);
 }
 
 // rectangle function (increase by 180)
@@ -177,6 +191,14 @@ void displayRectangles (){
     al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
     al_flip_display();
 
+}
+
+//calculates the score that is achieved by the player
+int addScore(int &total, int shirt, int pants, int shoes, int acc){
+    total = shirt + pants + shoes + acc;
+    if()
+
+    return total;
 }
 
 void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
@@ -233,5 +255,3 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
             ac[i].value = 58;
     }
 }
-
-
