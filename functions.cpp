@@ -20,7 +20,7 @@ void loadGraphics(){
     printImage (103, 720, 1);
     printImage (103, 900, 1);
     // print restart button
-    printImage (634, 756, 5);
+    printImage (634, 736, 5);
 }
 
 int loadText(){
