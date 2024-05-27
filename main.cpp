@@ -217,7 +217,7 @@ int main(){
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }//restart rectangle code
-        else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+        else if (ev.mouse.x >= 860 && ev.mouse.y >= 950 && ev.mouse.x <= 990 && ev.mouse.y <= 1000 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             shirtClicked = false;
             pantsClicked = false;
             shoesClicked = false;
