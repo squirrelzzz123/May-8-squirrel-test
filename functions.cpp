@@ -81,7 +81,7 @@ void printImage (int x, int y, int file){
 //comic.ttf
 int printScore(int total){
         //print images of rectangles for the scores
-       printImage(1920/2-410, 25, 3);
+       printImage(SCREEN_W/2-410, 25, 3);
        //printImage(1920/2-123, 25, 3);
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
@@ -90,12 +90,12 @@ int printScore(int total){
           return -1;
        }
 
-       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
-       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       al_draw_text(font, COLOUR, SCREEN_W/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, SCREEN_W/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
        //print current score
        char str[10];
         sprintf(str, "%d", total);
-       al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, SCREEN_W/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
        //print highest score
         //sprintf(str, "%d", high);
        //al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
@@ -106,7 +106,7 @@ int printScore(int total){
 int printHighScore(int high){
         //print images of rectangles for the scores
        //printImage(1920/2-410, 25, 3);
-       printImage(1920/2-123, 25, 3);
+       printImage(SCREEN_W/2-123, 25, 3);
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
        if (!font){
@@ -114,18 +114,17 @@ int printHighScore(int high){
           return -1;
        }
 
-       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
-       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       al_draw_text(font, COLOUR, SCREEN_W/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, SCREEN_W/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
        //print current score
        char str[10];
         sprintf(str, "%d", high);
        //al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
        //print highest score
         //sprintf(str, "%d", high);
-       al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, SCREEN_W/2+84, 73, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 }
-
 int returnHighScore(int &highScore, int current){
     if(current > highScore){
         highScore = current;
