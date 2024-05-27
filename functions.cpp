@@ -14,11 +14,11 @@ ALLEGRO_DISPLAY *display = nullptr;
 //loads pictures and background onto display
 void loadGraphics(){
     printImage (0, 0, 4);
-    printImage (113, 180, 1);
-    printImage (95, 335, 2);
-    printImage (95, 515, 2);
-    printImage (113, 720, 1);
-    printImage (113, 900, 1);
+    printImage (103, 180, 1);
+    printImage (75, 335, 2);
+    printImage (75, 515, 2);
+    printImage (103, 720, 1);
+    printImage (103, 900, 1);
     // print restart button
     printImage (634, 756, 5);
 }
@@ -34,10 +34,10 @@ int loadText(){
           al_show_native_message_box(display, "Error", "Error", "Could not load superLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
-       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
-       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
-       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
-       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+       al_draw_text(font, COLOUR, 125, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 300, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1561, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1736, 60, ALLEGRO_ALIGN_CENTRE, "Others");
 
        al_flip_display();
 }
@@ -59,6 +59,8 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("background.png");
     } else if (file == 5){
         image = al_load_bitmap("restart.png");
+    } else if (file == 6){
+        image = al_load_bitmap("loseScreen.png");
     }
 
   	// error message
@@ -172,19 +174,19 @@ void displayRectangles (){
 
     // For shirts
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(70, 150 + (i*180), 180, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For pants
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(245, 150 + (i*180), 355, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For shoes
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(1510, 150 + (i*180), 1620, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
     // For Accessories
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+         al_draw_rectangle(1695, 150 + (i*180), 1805, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
     //restart rectangle - delete at the end :)
     al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
@@ -267,5 +269,3 @@ void printHint (int score){
        al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "I don't like the colour yellow :(");
     }
 }
-
-
