@@ -14,13 +14,13 @@ ALLEGRO_DISPLAY *display = nullptr;
 //loads pictures and background onto display
 void loadGraphics(){
     printImage (0, 0, 4);
-    printImage (103, 180, 1);
-    printImage (75, 335, 2);
-    printImage (75, 515, 2);
-    printImage (103, 720, 1);
-    printImage (103, 900, 1);
+    printImage (113, 180, 1);
+    printImage (95, 335, 2);
+    printImage (95, 515, 2);
+    printImage (113, 720, 1);
+    printImage (113, 900, 1);
     // print restart button
-    printImage (634, 736, 5);
+    printImage (634, 756, 5);
 }
 
 int loadText(){
@@ -31,13 +31,14 @@ int loadText(){
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
        if (!font){
-          al_show_native_message_box(display, "Error", "Error", "Could not load superLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf",
+                                        nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
-       al_draw_text(font, COLOUR, 125, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
-       al_draw_text(font, COLOUR, 300, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
-       al_draw_text(font, COLOUR, 1561, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
-       al_draw_text(font, COLOUR, 1736, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
 
        al_flip_display();
 }
@@ -61,6 +62,9 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("restart.png");
     } else if (file == 6){
         image = al_load_bitmap("loseScreen.png");
+    } else if (file == 7){
+        image = al_load_bitmap("winScreen.png");
+
     }
 
   	// error message
@@ -81,7 +85,7 @@ void printImage (int x, int y, int file){
 //comic.ttf
 int printScore(int total){
         //print images of rectangles for the scores
-       printImage(SCREEN_W/2-410, 25, 3);
+       printImage(1920/2-410, 25, 3);
        //printImage(1920/2-123, 25, 3);
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
@@ -90,12 +94,12 @@ int printScore(int total){
           return -1;
        }
 
-       al_draw_text(font, COLOUR, SCREEN_W/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
-       al_draw_text(font, COLOUR, SCREEN_W/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
        //print current score
        char str[10];
         sprintf(str, "%d", total);
-       al_draw_text(font, COLOUR, SCREEN_W/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
        //print highest score
         //sprintf(str, "%d", high);
        //al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
@@ -106,7 +110,7 @@ int printScore(int total){
 int printHighScore(int high){
         //print images of rectangles for the scores
        //printImage(1920/2-410, 25, 3);
-       printImage(SCREEN_W/2-123, 25, 3);
+       printImage(1920/2-123, 25, 3);
        // load the specific font you want
        ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
        if (!font){
@@ -114,17 +118,18 @@ int printHighScore(int high){
           return -1;
        }
 
-       al_draw_text(font, COLOUR, SCREEN_W/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
-       al_draw_text(font, COLOUR, SCREEN_W/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
        //print current score
        char str[10];
         sprintf(str, "%d", high);
        //al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
        //print highest score
         //sprintf(str, "%d", high);
-       al_draw_text(font, COLOUR, SCREEN_W/2+84, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 }
+
 int returnHighScore(int &highScore, int current){
     if(current > highScore){
         highScore = current;
@@ -173,22 +178,22 @@ void displayRectangles (){
 
     // For shirts
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(70, 150 + (i*180), 180, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For pants
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(245, 150 + (i*180), 355, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
     }
     // For shoes
     for (int i = 0; i < 5; i ++){
-        al_draw_rectangle(1510, 150 + (i*180), 1620, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
     // For Accessories
     for (int i = 0; i < 5; i ++){
-         al_draw_rectangle(1695, 150 + (i*180), 1805, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
     }
-    //restart rectangle - delete at the end :)
-    al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
+    //restart rectangle
+    //al_draw_rectangle(860, 970, 990, 1020, al_map_rgb(200, 200, 0), 7);
     al_flip_display();
 
 }
@@ -196,6 +201,7 @@ void displayRectangles (){
 //calculates the score that is achieved by the player
 int addScore(int &total, int shirt, int pants, int shoes, int acc){
     total = shirt + pants + shoes + acc;
+
     return total;
 }
 
@@ -254,17 +260,26 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     }
 }
 
-void printHint (int score){
-    if (score < 75){
-        // text
-       al_init_font_addon(); // initialize the font addon
-       al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int highScore, int &totalScore){
+        shirtC = false;
+        pantsC = false;
+        shoesC = false;
+        accC = false;
+        A = 0;
+        P = 0;
+        Shi = 0;
+        Sho = 0;
 
-       // load the specific font you want
-       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
-       if (!font){
-          al_show_native_message_box(display, "Error", "Error", "Could not load superLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-       }
-       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "I don't like the colour yellow :(");
-    }
+        printf ("yay");
+        loadGraphics();
+        printHighScore(returnHighScore(highScore, totalScore));
+        //scoreCheck (highScore);
+        //prints highscore into file
+        printIntoFile(highScore);
+        FILE *fptr;
+        totalScore = 0;
+        printScore(addScore(totalScore, Shi, P, Sho, A));
+        displayRectangles();
+        loadText ();
+
 }
