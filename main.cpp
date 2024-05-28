@@ -75,7 +75,6 @@ int main(){
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 510 && ev.mouse.x <= 200 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-
             if(!shirtClicked){
                 printImage (740, 500, 2);
                 mainSquirrel.sShirt = arrShirts[2];
