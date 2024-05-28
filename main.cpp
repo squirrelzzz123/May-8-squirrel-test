@@ -8,8 +8,6 @@
 #include <allegro5/allegro_ttf.h>
 #include "squirrel.h"
 
-#define COLOUR al_map_rgb(200, 200, 0)
-
 int main(){
     //Declare and initialize variables
     int totalScore = 0;
@@ -27,33 +25,26 @@ int main(){
     Shoes arrShoes[5];
     Pants arrPants[5];
     Accessories arrAcc[5];
-
     //Sets the points for each clothing piece
     clothingArrays(arrPants, arrShirts, arrShoes, arrAcc);
-
     // initialize Allegro and mouse functions
     al_init();
     al_init_primitives_addon();
     al_install_mouse();
-
     // Initialize display
     ALLEGRO_DISPLAY *display = nullptr;
     display = al_create_display(SCREEN_W, SCREEN_H);
     al_set_window_title(display, "Squirrel Game");
-
     // Initialize event queue
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-    bool select = false;
     event_queue = al_create_event_queue();
     al_register_event_source(event_queue, al_get_mouse_event_source());
-
     // Initialize image add on
  	if (!al_init_image_addon()) {
     	// error message
     	al_show_native_message_box(display, "Error", "Error", "Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
     	return -1;
 	}
-
     //load clothing into the boxes
     loadGraphics();
     //display rectangles onto screen
@@ -64,13 +55,10 @@ int main(){
     printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
     //prints out initial high score of 0
     printHighScore(highScore);
-
-
 // MOUSE FUNCTIONS AND RECTANGLE
-    while(!select){
+    while(true){
         ALLEGRO_EVENT ev;
         al_wait_for_event(event_queue, &ev);
-
         // column 1 Shirt
         if(ev.mouse.x >= 90 && ev.mouse.y >= 150 && ev.mouse.x <= 200 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
@@ -216,8 +204,8 @@ int main(){
                 accClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
-        }//restart rectangle code
-        else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+        //restart rectangle code
+        } else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 275){
             printImage (0,0,7);
@@ -227,6 +215,5 @@ int main(){
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
         }
     }
-
     return 0;
 }
