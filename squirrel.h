@@ -41,5 +41,4 @@ int loadText();
 int printHighScore(int high);
 int printIntoFile(int &highScore);
 int returnHighScore(int &highScore, int current);
-int scoreCheck (int highScore);
 void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int h, int &t);
