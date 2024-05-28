@@ -2,8 +2,8 @@
 //Header File
 
 // Define screen size
-const int SCREEN_W = 1920;
-const int SCREEN_H = 1080;
+const int SCREEN_W = 1840;
+const int SCREEN_H = 1020;
 
 //Create stucts for the pieces of clothing
 struct Pants {
@@ -42,3 +42,4 @@ int printHighScore(int high);
 int printIntoFile(int &highScore);
 int returnHighScore(int &highScore, int current);
 int scoreCheck (int highScore);
+void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int h, int &t);
