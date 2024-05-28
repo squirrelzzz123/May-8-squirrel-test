@@ -218,9 +218,6 @@ int main(){
             }
         }//restart rectangle code
         else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            printImage (0,0,6);
-            printImage (634, 756, 5);
-            al_rest(5);
             shirtClicked = false;
             pantsClicked = false;
             shoesClicked = false;
@@ -242,6 +239,30 @@ int main(){
             loadText ();
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 300){
             printImage (0,0,7);
+        } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore <= 200){
+            printImage (0,0,6);
+            al_rest(5);
+            shirtClicked = false;
+            pantsClicked = false;
+            shoesClicked = false;
+            accClicked = false;
+            mainSquirrel.sAcc.value = 0;
+            mainSquirrel.sPants.value = 0;
+            mainSquirrel.sShirt.value = 0;
+            mainSquirrel.sShoes.value = 0;
+            printf ("yay");
+            loadGraphics();
+            printHighScore(returnHighScore(highScore, totalScore));
+            //scoreCheck (highScore);
+            //prints highscore into file
+            printIntoFile(highScore);
+            FILE *fptr;
+            totalScore = 0;
+            printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
+            displayRectangles();
+            loadText ();
     }
+    }
+
     return 0;
 }
