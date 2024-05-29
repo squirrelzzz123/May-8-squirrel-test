@@ -170,14 +170,14 @@ int main(){
         // column 4 Accessories
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 150 && ev.mouse.x <= 1815 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!accClicked){
-                printImage (830, 500, 2);
+                printImage (660, 250 ,9); // black hat
                 mainSquirrel.sAcc = arrAcc[0];
                 accClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 330 && ev.mouse.x <= 1815 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!accClicked){
-                printImage (800, 500, 2);
+                printImage (645, 390, 11); // gold chain
                 mainSquirrel.sAcc = arrAcc[1];
                 accClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
