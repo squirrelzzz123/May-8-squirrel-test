@@ -13,12 +13,15 @@ ALLEGRO_DISPLAY *display = nullptr;
 
 //loads pictures and background onto display
 void loadGraphics(){
+    //print background
     printImage (0, 0, 4);
     printImage (113, 180, 1);
     printImage (95, 335, 2);
     printImage (95, 515, 2);
     printImage (113, 720, 1);
     printImage (113, 900, 1);
+    //print squirrel
+    printImage (300, 200, 8);
     // print restart button
     printImage (634, 756, 5);
 }
@@ -61,6 +64,8 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("loseScreen.png");
     } else if (file == 7){
         image = al_load_bitmap("winScreen.png");
+    } else if (file == 8){
+        image = al_load_bitmap("realSquirrel.png");
     }
   	// error message
   	if (!image) {
@@ -210,7 +215,7 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     }
 }
 
-void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int highScore, int &totalScore){
+void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int &highScore, int &totalScore){
         shirtC = false;
         pantsC = false;
         shoesC = false;
