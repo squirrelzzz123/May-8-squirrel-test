@@ -15,13 +15,17 @@ ALLEGRO_DISPLAY *display = nullptr;
 void loadGraphics(){
     //print background
     printImage (0, 0, 4);
-    printImage (113, 180, 1);
+
+    //print shirt column
     printImage (95, 335, 2);
     printImage (95, 515, 2);
+    printImage (113, 180, 1);
     printImage (113, 720, 1);
     printImage (113, 900, 1);
+    //print accesories
+    printImage (1710, 170, 10);
     //print squirrel
-    printImage (300, 200, 8);
+    printImage (580, 250, 8); //black hat
     // print restart button
     printImage (634, 756, 5);
 }
@@ -65,7 +69,13 @@ void printImage (int x, int y, int file){
     } else if (file == 7){
         image = al_load_bitmap("winScreen.png");
     } else if (file == 8){
-        image = al_load_bitmap("realSquirrel.png");
+        image = al_load_bitmap("imagefromkate.png");
+    } else if (file == 9){
+        image = al_load_bitmap("blackHat.png");
+    } else if (file == 10){
+        image = al_load_bitmap("smallblackHat.png");
+    } else if (file == 11){
+        image = al_load_bitmap("goldChain.png");
     }
   	// error message
   	if (!image) {
