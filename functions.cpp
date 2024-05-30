@@ -23,9 +23,17 @@ void loadGraphics(){
     printImage (113, 720, 1);
     printImage (113, 900, 1);
     //print accesories
-    printImage (1710, 170, 10);
+    printImage (1710, 170, 10); //black hat
+    printImage (1710, 355, 12); //gold chain
+    printImage (1710, 545, 14); //pink glasses
+    printImage (1710, 725, 16); //flower necklace
+    printImage (1720, 875, 18); //rolex
+    //print pants
+    printImage (270, 170, 20); //yellow pants
+    //print shoes
+    printImage (1535, 170, 22); //air force
     //print squirrel
-    printImage (580, 250, 8); //black hat
+    printImage (580, 250, 8);
     // print restart button
     printImage (634, 756, 5);
 }
@@ -70,13 +78,39 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("winScreen.png");
     } else if (file == 8){
         image = al_load_bitmap("imagefromkate.png");
+        //accessories
     } else if (file == 9){
         image = al_load_bitmap("blackHat.png");
     } else if (file == 10){
         image = al_load_bitmap("smallblackHat.png");
     } else if (file == 11){
         image = al_load_bitmap("goldChain.png");
+    } else if (file == 12){
+        image = al_load_bitmap("smallgoldChain.png");
+    } else if (file == 13){
+        image = al_load_bitmap("pinkGlasses.png");
+    } else if (file == 14){
+        image = al_load_bitmap("smallpinkGlasses.png");
+    }  else if (file == 15){
+        image = al_load_bitmap("flower.png");
+    }  else if (file == 16){
+        image = al_load_bitmap("smallFlower.png");
+    }  else if (file == 17){
+        image = al_load_bitmap("rolex.png");
+    }   else if (file == 18){
+        image = al_load_bitmap("smallRolex.png");
+        //pants
+    }   else if (file == 19){
+        image = al_load_bitmap("Ypants.png");
+    }   else if (file == 20){
+        image = al_load_bitmap("smallYpants.png");
+        //shoes
+    }   else if (file == 21){
+        image = al_load_bitmap("airForce.png");
+    }   else if (file == 22){
+        image = al_load_bitmap("smallairForce.png");
     }
+
   	// error message
   	if (!image) {
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
