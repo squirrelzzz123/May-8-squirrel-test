@@ -32,8 +32,12 @@ void loadGraphics(){
     printImage (270, 170, 20); //yellow pants
     //print shoes
     printImage (1535, 170, 22); //air force
+    printImage (1535, 365, 24); //blue sandals
+    printImage (1535, 530, 26); //black boot
+    printImage (1535, 695, 28); //yellow boot
+    printImage (1535, 900, 30); //brown birks
     //print squirrel
-    printImage (580, 250, 8);
+    printImage (640+80, 260, 8);
     // print restart button
     printImage (634, 756, 5);
 }
@@ -76,8 +80,9 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("loseScreen.png");
     } else if (file == 7){
         image = al_load_bitmap("winScreen.png");
+        // load squirrel
     } else if (file == 8){
-        image = al_load_bitmap("imagefromkate.png");
+        image = al_load_bitmap("finalSquirrel.png");
         //accessories
     } else if (file == 9){
         image = al_load_bitmap("blackHat.png");
@@ -109,6 +114,22 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("airForce.png");
     }   else if (file == 22){
         image = al_load_bitmap("smallairForce.png");
+    }   else if (file == 23){
+        image = al_load_bitmap("sandal.png");
+    }   else if (file == 24){
+        image = al_load_bitmap("smallsandal.png");
+    }   else if (file == 25){
+        image = al_load_bitmap("blackBoot.png");
+    }   else if (file == 26){
+        image = al_load_bitmap("smallblackBoot.png");
+    }   else if (file == 27){
+        image = al_load_bitmap("rainboot.png");
+    }   else if (file == 28){
+        image = al_load_bitmap("smallrainboot.png");
+    }   else if (file == 29){
+        image = al_load_bitmap("brown.png");
+    }   else if (file == 30){
+        image = al_load_bitmap("smallbrown.png");
     }
 
   	// error message
