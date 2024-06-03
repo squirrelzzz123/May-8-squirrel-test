@@ -62,28 +62,28 @@ int main(){
         // column 1 Shirt
         if(ev.mouse.x >= 90 && ev.mouse.y >= 150 && ev.mouse.x <= 200 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                printImage (910, 500, 1);
+                printImage (720, 426, 31); //tank top
                 mainSquirrel.sShirt = arrShirts[0];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 330 && ev.mouse.x <= 200 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                printImage (720, 500, 2);
+                printImage (716, 396, 33); //i love acorns
                 mainSquirrel.sShirt = arrShirts[1];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 510 && ev.mouse.x <= 200 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                printImage (740, 500, 2);
+                printImage (688, 382, 35); //pink fluffy jacket
                 mainSquirrel.sShirt = arrShirts[2];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 690 && ev.mouse.x <= 200 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                printImage (760, 500, 2);
+                printImage (650, 300, 2);
                 mainSquirrel.sShirt = arrShirts[3];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
@@ -96,7 +96,7 @@ int main(){
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         // column 2 Pants
-        }else if (ev.mouse.x >= 265 && ev.mouse.y >= 150 && ev.mouse.x <= 375 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
+         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 150 && ev.mouse.x <= 375 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
                 printImage (620+80, 600, 19); //yellow pants
                 mainSquirrel.sPants = arrPants[0];
@@ -105,28 +105,28 @@ int main(){
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 330 && ev.mouse.x <= 375 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
-                printImage (700, 500, 2);
+                printImage (725, 645, 40); // green pants
                 mainSquirrel.sPants = arrPants[1];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 510 && ev.mouse.x <= 375 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
-                printImage (750, 500, 2);
+                printImage (720, 660, 42); // flower pants
                 mainSquirrel.sPants = arrPants[2];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 690 && ev.mouse.x <= 375 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
-                printImage (800, 500, 2);
+                printImage (720, 670, 44); // cargo pants
                 mainSquirrel.sPants = arrPants[3];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 870 && ev.mouse.x <= 375 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!pantsClicked){
-                printImage (820, 500, 2);
+                printImage (720, 670, 46); // blue pants
                 mainSquirrel.sPants = arrPants[4];
                 pantsClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
@@ -214,8 +214,8 @@ int main(){
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 275){
             printImage (0,0,7);
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore < 275){
-	    al_rest(3);
-	    printImage (0,0,6);
+            al_rest(3);
+            printImage (0,0,6);
             al_rest(3);
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
         }
