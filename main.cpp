@@ -214,7 +214,8 @@ int main(){
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 275){
             printImage (0,0,7);
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore < 275){
-            printImage (0,0,6);
+	    al_rest(3);
+	    printImage (0,0,6);
             al_rest(3);
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
         }
