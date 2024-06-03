@@ -17,9 +17,10 @@ void loadGraphics(){
     printImage (0, 0, 4);
 
     //print shirt column
-    printImage (95, 335, 2);
-    printImage (95, 515, 2);
-    printImage (113, 180, 1);
+    printImage (95, 160 , 32); //tank top
+    printImage (95, 340, 34); //i love acorns
+    printImage (95, 515, 36); //i love acorns
+    //printImage (113, 180, 1);
     printImage (113, 720, 1);
     printImage (113, 900, 1);
     //print accesories
@@ -30,6 +31,10 @@ void loadGraphics(){
     printImage (1720, 875, 18); //rolex
     //print pants
     printImage (270, 170, 20); //yellow pants
+    printImage (270, 350, 41); // Green Pants
+    printImage (270, 530, 43); // flower Pants
+    printImage (270, 710, 45); // cargo
+    printImage (270, 890, 47); // blue pants
     //print shoes
     printImage (1535, 170, 22); //air force
     printImage (1535, 365, 24); //blue sandals
@@ -104,11 +109,27 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("rolex.png");
     }   else if (file == 18){
         image = al_load_bitmap("smallRolex.png");
-        //pants
+         //pants
     }   else if (file == 19){
         image = al_load_bitmap("Ypants.png");
     }   else if (file == 20){
         image = al_load_bitmap("smallYpants.png");
+    }   else if (file == 40){
+        image = al_load_bitmap("greenPant.png");
+    }   else if (file == 41){
+        image = al_load_bitmap("SmallgreenPant.png");
+    }   else if (file == 42){
+        image = al_load_bitmap("flowerpant.png");
+    }   else if (file == 43){
+        image = al_load_bitmap("Smallflowerpant.png");
+    }   else if (file == 44){
+        image = al_load_bitmap("cargopant.png");
+    }   else if (file == 45){
+        image = al_load_bitmap("smallcargopant.png");
+    }   else if (file == 46){
+        image = al_load_bitmap("bluepant.png");
+    }   else if (file == 47){
+        image = al_load_bitmap("smallbluepant.png");
         //shoes
     }   else if (file == 21){
         image = al_load_bitmap("airForce.png");
@@ -130,7 +151,21 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("brown.png");
     }   else if (file == 30){
         image = al_load_bitmap("smallbrown.png");
+        //shirt
+    }   else if (file == 31){
+        image = al_load_bitmap("tanktop.png");
+    }   else if (file == 32){
+        image = al_load_bitmap("smalltanktop.png");
+    }   else if (file == 33){
+        image = al_load_bitmap("iloveacorns.png");
+    }   else if (file == 34){
+        image = al_load_bitmap("smalliloveacorns.png");
+    }   else if (file == 35){
+        image = al_load_bitmap("pink.png");
+    }   else if (file == 36){
+        image = al_load_bitmap("smallpink.png");
     }
+
 
   	// error message
   	if (!image) {
