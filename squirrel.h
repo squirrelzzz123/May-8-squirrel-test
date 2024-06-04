@@ -1,6 +1,9 @@
 //Nina Tseng and Alyssa Shen
 //Header File
 
+#define BLUE al_map_rgb(0, 130, 200)
+#define COLOUR al_map_rgb(229, 235, 158)
+
 // Define screen size
 const int SCREEN_W = 1840;
 const int SCREEN_H = 1020;
@@ -43,3 +46,4 @@ int printIntoFile(int &highScore);
 int returnHighScore(int &highScore, int current);
 void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int &h, int &t);
 int printResizedImage (int w, int h, int file);
+void printStart();
