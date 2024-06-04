@@ -20,9 +20,7 @@ void loadGraphics(){
     printImage (95, 160 , 32); //tank top
     printImage (95, 340, 34); //i love acorns
     printImage (95, 515, 36); //i love acorns
-    //printImage (113, 180, 1);
-    printImage (113, 720, 1);
-    printImage (113, 900, 1);
+    printImage (95, 700, 38); //i love acorns
     //print accesories
     printImage (1710, 170, 10); //black hat
     printImage (1710, 355, 12); //gold chain
@@ -164,6 +162,10 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("pink.png");
     }   else if (file == 36){
         image = al_load_bitmap("smallpink.png");
+    }   else if (file == 37){
+        image = al_load_bitmap("hawaii.png");
+    }   else if (file == 38){
+        image = al_load_bitmap("smallhawaii.png");
     }
 
 
@@ -335,4 +337,23 @@ void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pants
         printScore(addScore(totalScore, Shi, P, Sho, A));
         displayRectangles();
         loadText ();
+}
+
+void printStart(){
+    al_clear_to_color(COLOUR);
+    al_flip_display();
+    FILE *fptr;
+    fptr = fopen("instructions.txt", "r");
+    char str[200];
+    fscanf(fptr, "s", str);
+    while(fscanf(fptr, "s", str) != nullptr){
+        if(strcmp(fscanf(fptr, "s", str), "\n"){
+           }
+    }
+    
+    sprintf(str, "%d", total);
+    al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+    
+    fclose(fptr);
+    
 }
