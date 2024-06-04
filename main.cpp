@@ -6,219 +6,354 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#define COLOUR al_map_rgb(200, 200, 0)
 #include "squirrel.h"
 
-int main(){
-    //Declare and initialize variables
-    int totalScore = 0;
-    int highScore = 0;
-    bool shirtClicked = false;
-    bool pantsClicked = false;
-    bool shoesClicked = false;
-    bool accClicked = false;
-    Squirrel mainSquirrel;
-    mainSquirrel.sPants.value = 0;
-    mainSquirrel.sShirt.value = 0;
-    mainSquirrel.sShoes.value = 0;
-    mainSquirrel.sAcc.value = 0;
-    Shirt arrShirts[5];
-    Shoes arrShoes[5];
-    Pants arrPants[5];
-    Accessories arrAcc[5];
-    //Sets the points for each clothing piece
-    clothingArrays(arrPants, arrShirts, arrShoes, arrAcc);
-    // initialize Allegro and mouse functions
-    al_init();
-    al_init_primitives_addon();
-    al_install_mouse();
-    // Initialize display
+ALLEGRO_DISPLAY *display = nullptr;
+
+//loads pictures and background onto display
+void loadGraphics(){
+    //print background
+    printImage (0, 0, 4);
+
+    //print shirt column
+    printImage (95, 160 , 32); //tank top
+    printImage (95, 340, 34); //i love acorns
+    printImage (95, 515, 36); //i love acorns
+    printImage (95, 700, 38); //i love acorns
+    //print accesories
+    printImage (1710, 170, 10); //black hat
+    printImage (1710, 355, 12); //gold chain
+    printImage (1710, 545, 14); //pink glasses
+    printImage (1710, 725, 16); //flower necklace
+    printImage (1720, 875, 18); //rolex
+    //print pants
+    printImage (270, 170, 20); //yellow pants
+    printImage (270, 350, 41); // Green Pants
+    printImage (270, 530, 43); // flower Pants
+    printImage (270, 710, 45); // cargo
+    printImage (270, 890, 47); // blue pants
+    //print shoes
+    printImage (1535, 170, 22); //air force
+    printImage (1535, 365, 24); //blue sandals
+    printImage (1535, 530, 26); //black boot
+    printImage (1535, 695, 28); //yellow boot
+    printImage (1535, 900, 30); //brown birks
+    //print squirrel
+    printImage (640+80, 260, 8);
+    // print restart button
+    printImage (634, 756, 5);
+}
+
+int loadText(){
+        // text
+       al_init_font_addon(); // initialize the font addon
+       al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 40, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+       al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
+       al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
+       al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
+       al_draw_text(font, COLOUR, 1756, 60, ALLEGRO_ALIGN_CENTRE, "Others");
+        //Flip to display
+       al_flip_display();
+}
+
+void printImage (int x, int y, int file){
+    // declare and initialize image and display
     ALLEGRO_DISPLAY *display = nullptr;
-    display = al_create_display(SCREEN_W, SCREEN_H);
-    al_set_window_title(display, "Squirrel Game");
-    // Initialize event queue
-    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-    event_queue = al_create_event_queue();
-    al_register_event_source(event_queue, al_get_mouse_event_source());
-    // Initialize image add on
- 	if (!al_init_image_addon()) {
-    	// error message
-    	al_show_native_message_box(display, "Error", "Error", "Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-    	return -1;
-	}
-    //load clothing into the boxes
-    loadGraphics();
-    //display rectangles onto screen
-    displayRectangles ();
-    al_flip_display();
-    loadText();
-    //prints out initial score of 0
-    printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-    //prints out initial high score of 0
-    printHighScore(highScore);
-// MOUSE FUNCTIONS AND RECTANGLE
-    while(true){
-        ALLEGRO_EVENT ev;
-        al_wait_for_event(event_queue, &ev);
-        // column 1 Shirt
-        if(ev.mouse.x >= 90 && ev.mouse.y >= 150 && ev.mouse.x <= 200 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shirtClicked){
-                printImage (720, 426, 31); //tank top
-                mainSquirrel.sShirt = arrShirts[0];
-                shirtClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 90 && ev.mouse.y >= 330 && ev.mouse.x <= 200 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shirtClicked){
-                printImage (716, 396, 33); //i love acorns
-                mainSquirrel.sShirt = arrShirts[1];
-                shirtClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 90 && ev.mouse.y >= 510 && ev.mouse.x <= 200 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shirtClicked){
-                printImage (688, 382, 35); //pink fluffy jacket
-                mainSquirrel.sShirt = arrShirts[2];
-                shirtClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 90 && ev.mouse.y >= 690 && ev.mouse.x <= 200 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shirtClicked){
-                printImage (650, 300, 2);
-                mainSquirrel.sShirt = arrShirts[3];
-                shirtClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 90 && ev.mouse.y >= 870 && ev.mouse.x <= 200 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shirtClicked){
-                printImage (780, 500, 2);
-                mainSquirrel.sShirt = arrShirts[5];
-                shirtClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        // column 2 Pants
-         }else if (ev.mouse.x >= 265 && ev.mouse.y >= 150 && ev.mouse.x <= 375 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!pantsClicked){
-                printImage (620+80, 600, 19); //yellow pants
-                mainSquirrel.sPants = arrPants[0];
-                pantsClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 265 && ev.mouse.y >= 330 && ev.mouse.x <= 375 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!pantsClicked){
-                printImage (725, 645, 40); // green pants
-                mainSquirrel.sPants = arrPants[1];
-                pantsClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 265 && ev.mouse.y >= 510 && ev.mouse.x <= 375 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!pantsClicked){
-                printImage (720, 660, 42); // flower pants
-                mainSquirrel.sPants = arrPants[2];
-                pantsClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 265 && ev.mouse.y >= 690 && ev.mouse.x <= 375 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!pantsClicked){
-                printImage (720, 670, 44); // cargo pants
-                mainSquirrel.sPants = arrPants[3];
-                pantsClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 265 && ev.mouse.y >= 870 && ev.mouse.x <= 375 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!pantsClicked){
-                printImage (720, 670, 46); // blue pants
-                mainSquirrel.sPants = arrPants[4];
-                pantsClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        // column 3 Shoes
-        }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 150 && ev.mouse.x <= 1640 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shoesClicked){
-                printImage (700, 880, 21); //air forces
-                printImage (900, 890, 21); //air forces
-                mainSquirrel.sShoes = arrShoes[0];
-                shoesClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 330 && ev.mouse.x <= 1640 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shoesClicked){
-                printImage (700, 900, 23); //blue sandal
-                printImage (900, 910, 23); //blue sandal
-                mainSquirrel.sShoes = arrShoes[1];
-                shoesClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 510 && ev.mouse.x <= 1640 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shoesClicked){
-                printImage (690, 895, 25); //blackboot
-                printImage (900, 900, 25); //blackboot
-                mainSquirrel.sShoes = arrShoes[2];
-                shoesClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 690 && ev.mouse.x <= 1640 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shoesClicked){
-                printImage (708, 860, 27); // yellow rainboot
-                printImage (910, 860, 27); // yellow rainboot
-                mainSquirrel.sShoes = arrShoes[3];
-                shoesClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1530 && ev.mouse.y >= 870 && ev.mouse.x <= 1640 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!shoesClicked){
-                printImage (710, 900, 29); //brown birks
-                printImage (920, 912, 29); //brown birks
-                mainSquirrel.sShoes = arrShoes[4];
-                shoesClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        // column 4 Accessories
-        }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 150 && ev.mouse.x <= 1815 && ev.mouse.y <= 260 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!accClicked){
-                printImage (660+80, 250 ,9); // black hat
-                mainSquirrel.sAcc = arrAcc[0];
-                accClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 330 && ev.mouse.x <= 1815 && ev.mouse.y <= 440 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!accClicked){
-                printImage (645+80, 390, 11); // gold chain
-                mainSquirrel.sAcc = arrAcc[1];
-                accClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 510 && ev.mouse.x <= 1815 && ev.mouse.y <= 620 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!accClicked){
-                printImage (660+80, 340, 13); // pink glasses
-                mainSquirrel.sAcc = arrAcc[2];
-                accClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 690 && ev.mouse.x <= 1815 && ev.mouse.y <= 800 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!accClicked){
-                printImage (645+80, 410, 15); // flower necklace
-                mainSquirrel.sAcc = arrAcc[3];
-                accClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        }else if (ev.mouse.x >= 1705 && ev.mouse.y >= 870 && ev.mouse.x <= 1815 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            if(!accClicked){
-                printImage (770+80, 565 , 17); // rolex
-                mainSquirrel.sAcc = arrAcc[4];
-                accClicked = true;
-                printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
-            }
-        //restart rectangle code
-        } else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
-            reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
-        } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 275){
-            printImage (0,0,7);
-        } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore < 275){
-            al_rest(3);
-            printImage (0,0,6);
-            al_rest(3);
-            reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
-        }
+    ALLEGRO_BITMAP *image = nullptr;
+
+	// assign file to image
+	if (file == 1){
+        image = al_load_bitmap("rainbow2.bmp");
+	} else if (file == 2){
+        image = al_load_bitmap("redshirt.png");
+    } else if (file == 3){
+        image = al_load_bitmap("yellowsquare.png");
+    } else if (file == 4){
+        image = al_load_bitmap("background.png");
+    } else if (file == 5){
+        image = al_load_bitmap("restart.png");
+    } else if (file == 6){
+        image = al_load_bitmap("loseScreen.png");
+    } else if (file == 7){
+        image = al_load_bitmap("winScreen.png");
+        // load squirrel
+    } else if (file == 8){
+        image = al_load_bitmap("finalSquirrel.png");
+        //accessories
+    } else if (file == 9){
+        image = al_load_bitmap("blackHat.png");
+    } else if (file == 10){
+        image = al_load_bitmap("smallblackHat.png");
+    } else if (file == 11){
+        image = al_load_bitmap("goldChain.png");
+    } else if (file == 12){
+        image = al_load_bitmap("smallgoldChain.png");
+    } else if (file == 13){
+        image = al_load_bitmap("pinkGlasses.png");
+    } else if (file == 14){
+        image = al_load_bitmap("smallpinkGlasses.png");
+    }  else if (file == 15){
+        image = al_load_bitmap("flower.png");
+    }  else if (file == 16){
+        image = al_load_bitmap("smallFlower.png");
+    }  else if (file == 17){
+        image = al_load_bitmap("rolex.png");
+    }   else if (file == 18){
+        image = al_load_bitmap("smallRolex.png");
+         //pants
+    }   else if (file == 19){
+        image = al_load_bitmap("Ypants.png");
+    }   else if (file == 20){
+        image = al_load_bitmap("smallYpants.png");
+    }   else if (file == 40){
+        image = al_load_bitmap("greenPant.png");
+    }   else if (file == 41){
+        image = al_load_bitmap("SmallgreenPant.png");
+    }   else if (file == 42){
+        image = al_load_bitmap("flowerpant.png");
+    }   else if (file == 43){
+        image = al_load_bitmap("Smallflowerpant.png");
+    }   else if (file == 44){
+        image = al_load_bitmap("cargopant.png");
+    }   else if (file == 45){
+        image = al_load_bitmap("smallcargopant.png");
+    }   else if (file == 46){
+        image = al_load_bitmap("bluepant.png");
+    }   else if (file == 47){
+        image = al_load_bitmap("smallbluepant.png");
+        //shoes
+    }   else if (file == 21){
+        image = al_load_bitmap("airForce.png");
+    }   else if (file == 22){
+        image = al_load_bitmap("smallairForce.png");
+    }   else if (file == 23){
+        image = al_load_bitmap("sandal.png");
+    }   else if (file == 24){
+        image = al_load_bitmap("smallsandal.png");
+    }   else if (file == 25){
+        image = al_load_bitmap("blackBoot.png");
+    }   else if (file == 26){
+        image = al_load_bitmap("smallblackBoot.png");
+    }   else if (file == 27){
+        image = al_load_bitmap("rainboot.png");
+    }   else if (file == 28){
+        image = al_load_bitmap("smallrainboot.png");
+    }   else if (file == 29){
+        image = al_load_bitmap("brown.png");
+    }   else if (file == 30){
+        image = al_load_bitmap("smallbrown.png");
+        //shirt
+    }   else if (file == 31){
+        image = al_load_bitmap("tanktop.png");
+    }   else if (file == 32){
+        image = al_load_bitmap("smalltanktop.png");
+    }   else if (file == 33){
+        image = al_load_bitmap("iloveacorns.png");
+    }   else if (file == 34){
+        image = al_load_bitmap("smalliloveacorns.png");
+    }   else if (file == 35){
+        image = al_load_bitmap("pink.png");
+    }   else if (file == 36){
+        image = al_load_bitmap("smallpink.png");
+    }   else if (file == 37){
+        image = al_load_bitmap("hawaii.png");
+    }   else if (file == 38){
+        image = al_load_bitmap("smallhawaii.png");
     }
-    return 0;
+
+
+  	// error message
+  	if (!image) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+      	al_destroy_display(display);
+	 }
+	// print image based on coordinates given
+	al_draw_bitmap(image, x, y, 0);
+	// write display to screen
+	al_flip_display();
+}
+
+//prints out the score to the screen
+int printScore(int total){
+        //print images of rectangles for the scores
+       printImage(1920/2-410, 25, 3);
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       //print current score
+       char str[10];
+        sprintf(str, "%d", total);
+       al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_flip_display();
+}
+
+//print the highest score from the textfile
+int printHighScore(int high){
+        //print images of rectangles for the scores
+       printImage(1920/2-123, 25, 3);
+       // load the specific font you want
+       ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 30, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+       al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
+       al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
+       //print current score
+       char str[10];
+        sprintf(str, "%d", high);
+       al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
+       al_flip_display();
+}
+
+int returnHighScore(int &highScore, int current){
+    if(current > highScore){
+        highScore = current;
+        return highScore;
+    }else{
+        return highScore;
+    }
+}
+
+int printIntoFile(int &highScore){
+    FILE *fptr;
+    fptr = fopen("scoreCheck.txt", "w");
+    fprintf(fptr, "%d", highScore);
+    fclose(fptr);
+}
+
+// rectangle function (increase by 180)
+void displayRectangles (){
+    // For shirts
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(90, 150 + (i*180), 200, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+    }
+    // For pants
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(265, 150 + (i*180), 375, 260 + (i*180), al_map_rgb(200, 200, 0) , 7);
+    }
+    // For shoes
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(1530, 150 + (i*180), 1640, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+    }
+    // For Accessories
+    for (int i = 0; i < 5; i ++){
+        al_draw_rectangle(1705, 150 + (i*180), 1815, 260 + (i*180),al_map_rgb(200, 200, 0) , 7);
+    }
+    //restart rectangle
+    al_flip_display();
+}
+
+//calculates the score that is achieved by the player
+int addScore(int &total, int shirt, int pants, int shoes, int acc){
+    total = shirt + pants + shoes + acc;
+    return total;
+}
+
+void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
+    //array for shirts
+    for(int i = 0; i < 5; i++){
+        if(i == 0)
+            s[i].value = 5;
+        if(i == 1)
+            s[i].value = 100;
+        if(i == 2)
+            s[i].value = 4;
+        if(i == 3)
+            s[i].value = 12;
+        if(i == 4)
+            s[i].value = 55;
+    }
+    //array for shoes
+    for(int i = 0; i < 5; i++){
+        if(i == 0)
+            sh[i].value = 3;
+        if(i == 1)
+            sh[i].value = 88;
+        if(i == 2)
+            sh[i].value = 77;
+        if(i == 3)
+            sh[i].value = 13;
+        if(i == 4)
+            sh[i].value = 10;
+    }
+    //array for pants
+    for(int i = 0; i < 5; i++){
+        if(i == 0)
+            p[i].value = 90;
+        if(i == 1)
+            p[i].value = 34;
+        if(i == 2)
+            p[i].value = 24;
+        if(i == 3)
+            p[i].value = 10;
+        if(i == 4)
+            p[i].value = 78;
+    }
+    //array for accessories
+    for(int i = 0; i < 5; i++){
+        if(i == 0)
+            ac[i].value = 1;
+        if(i == 1)
+            ac[i].value = 36;
+        if(i == 2)
+            ac[i].value = 28;
+        if(i == 3)
+            ac[i].value = 48;
+        if(i == 4)
+            ac[i].value = 58;
+    }
+}
+
+void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int &highScore, int &totalScore){
+        shirtC = false;
+        pantsC = false;
+        shoesC = false;
+        accC = false;
+        A = 0;
+        P = 0;
+        Shi = 0;
+        Sho = 0;
+        printf ("yay");
+        loadGraphics();
+        printHighScore(returnHighScore(highScore, totalScore));
+        //scoreCheck (highScore);
+        //prints highscore into file
+        printIntoFile(highScore);
+        FILE *fptr;
+        totalScore = 0;
+        printScore(addScore(totalScore, Shi, P, Sho, A));
+        displayRectangles();
+        loadText ();
+}
+
+void printStart(){
+    al_clear_to_color(COLOUR);
+    al_flip_display();
+    FILE *fptr;
+    fptr = fopen("instructions.txt", "r");
+    char str[200];
+    fscanf(fptr, "s", str);
+    while(fscanf(fptr, "s", str) != nullptr){
+        if(strcmp(fscanf(fptr, "s", str), "\n"){
+           }
+    }
+    
+    sprintf(str, "%d", total);
+    al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
+    
+    fclose(fptr);
+    
 }
