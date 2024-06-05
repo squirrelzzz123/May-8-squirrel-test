@@ -10,14 +10,8 @@
 
 int main(){
     //Declare and initialize variables
-    int totalScore = 0;
-    int highScore = 0;
-    bool play = false;
-    bool again = false;
-    bool shirtClicked = false;
-    bool pantsClicked = false;
-    bool shoesClicked = false;
-    bool accClicked = false;
+    int totalScore = 0, highScore = 0;
+    bool play = false, again = false, shirtClicked = false, pantsClicked = false, shoesClicked = false, accClicked = false;
     Squirrel mainSquirrel;
     mainSquirrel.sPants.value = 0;
     mainSquirrel.sShirt.value = 0;
@@ -29,15 +23,16 @@ int main(){
     Accessories arrAcc[5];
     //Sets the points for each clothing piece
     clothingArrays(arrPants, arrShirts, arrShoes, arrAcc);
-    // initialize Allegro and mouse functions
+    // Initialize Allegro and mouse functions
     al_init();
     al_init_primitives_addon();
     al_install_mouse();
+
     // Initialize display
     ALLEGRO_DISPLAY *display = nullptr;
     display = al_create_display(SCREEN_W, SCREEN_H);
-    al_set_window_title(display, "Swaggy Squirrel");
-    // Initialize event queue
+    al_set_window_title(display, "Swaggy Squirrel - Nina and Alyssa");
+    // Initialize and register event queue
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
     event_queue = al_create_event_queue();
     al_register_event_source(event_queue, al_get_mouse_event_source());
@@ -47,10 +42,11 @@ int main(){
     	al_show_native_message_box(display, "Error", "Error", "Failed to initialize image addon!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
     	return -1;
 	}
-
+	//print the start/instructions screen
     printStart(play);
-    //load clothing into the boxes
+    //If user presses 0 to continue -->
     if(play){
+        //Load clothing into the boxes
         loadGraphics();
         //display rectangles onto screen
         displayRectangles ();
@@ -96,8 +92,8 @@ int main(){
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 870 && ev.mouse.x <= 200 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                //printImage (780, 500, 2);
-                mainSquirrel.sShirt = arrShirts[5];
+                printImage (720, 408, 48);
+                mainSquirrel.sShirt = arrShirts[4];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
             }
@@ -221,11 +217,12 @@ int main(){
             printEnd(again);
             if(again){
                 reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
-            }else{
+            }else if(!again){
+                printf("Successfully destroyed display\n");
                 al_destroy_display(display);
             }
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore < 275){
-            al_rest(2);
+            al_rest(1);
             printImage (0,0,6);
             al_rest(3);
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
