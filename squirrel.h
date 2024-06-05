@@ -46,4 +46,5 @@ int printIntoFile(int &highScore);
 int returnHighScore(int &highScore, int current);
 void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int &h, int &t);
 int printResizedImage (int w, int h, int file);
-void printStart();
+int printStart(bool &play);
+int printEnd(bool &again);
