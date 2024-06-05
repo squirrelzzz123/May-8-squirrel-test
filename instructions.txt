@@ -8,7 +8,7 @@ Once an item is selected from each column, the squirrel will judge the outfit.
 Points are based on how much the squirrel likes the pieces. 
 
 Try your best to impress the squirrel.
-Press 0 to continue...
+Press ANY KEY to continue...
 
 Button functions:
 -RESTART will allow you to restart 
