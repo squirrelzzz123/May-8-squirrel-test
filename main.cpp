@@ -13,6 +13,7 @@ int main(){
     int totalScore = 0;
     int highScore = 0;
     bool play = false;
+    bool again = false;
     bool shirtClicked = false;
     bool pantsClicked = false;
     bool shoesClicked = false;
@@ -47,7 +48,7 @@ int main(){
     	return -1;
 	}
 
-    printStart();
+    printStart(play);
     //load clothing into the boxes
     if(play){
         loadGraphics();
@@ -95,7 +96,7 @@ int main(){
             }
         }else if (ev.mouse.x >= 90 && ev.mouse.y >= 870 && ev.mouse.x <= 200 && ev.mouse.y <= 980 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             if(!shirtClicked){
-                printImage (780, 500, 2);
+                //printImage (780, 500, 2);
                 mainSquirrel.sShirt = arrShirts[5];
                 shirtClicked = true;
                 printScore(addScore(totalScore, mainSquirrel.sShirt.value, mainSquirrel.sPants.value, mainSquirrel.sShoes.value, mainSquirrel.sAcc.value));
@@ -217,7 +218,12 @@ int main(){
         } else if (ev.mouse.x >= 860 && ev.mouse.y >= 970 && ev.mouse.x <= 990 && ev.mouse.y <= 1020 && ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
             reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore >= 275){
-            printImage (0,0,7);
+            printEnd(again);
+            if(again){
+                reprintScreen(mainSquirrel.sAcc.value, mainSquirrel.sPants.value, mainSquirrel.sShirt.value, mainSquirrel.sShoes.value, shirtClicked, pantsClicked, shoesClicked, accClicked, highScore, totalScore);
+            }else{
+                al_destroy_display(display);
+            }
         } else if (shirtClicked == true && pantsClicked == true && shoesClicked == true && accClicked == true && totalScore < 275){
             al_rest(2);
             printImage (0,0,6);
