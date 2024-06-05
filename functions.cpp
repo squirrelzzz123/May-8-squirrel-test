@@ -11,22 +11,22 @@
 
 ALLEGRO_DISPLAY *display = nullptr;
 
-//loads pictures and background onto display
+//Function loads pictures and background onto display and in proper positions in respective rectangles
 void loadGraphics(){
     //print background
     printImage (0, 0, 4);
-
     //print shirt column
-    //printImage (95, 160 , 32); //tank top
+    printImage (95, 160 , 32); //tank top
     printImage (95, 340, 34); //i love acorns
-    printImage (95, 515, 36); //i love acorns
-    printImage (95, 700, 38); //i love acorns
+    printImage (95, 515, 36); //pink fluffy
+    printImage (95, 700, 38); //Hawaii flower shirt
+    printImage (96, 878, 49); //jacket
     //print accesories
     printImage (1710, 170, 10); //black hat
     printImage (1710, 355, 12); //gold chain
     printImage (1710, 545, 14); //pink glasses
     printImage (1710, 725, 16); //flower necklace
-    printImage (1720, 875, 18); //rolex
+    printImage (1720, 875, 18); //Rolex watch
     //print pants
     printImage (270, 170, 20); //yellow pants
     printImage (270, 350, 41); // Green Pants
@@ -38,13 +38,14 @@ void loadGraphics(){
     printImage (1535, 365, 24); //blue sandals
     printImage (1535, 530, 26); //black boot
     printImage (1535, 695, 28); //yellow boot
-    printImage (1535, 900, 30); //brown birks
+    printImage (1535, 900, 30); //brown birkenstocks
     //print squirrel
     printImage (640+80, 260, 8);
     // print restart button
     printImage (634, 756, 5);
 }
 
+//Function loads text for clothing onto the game screen
 int loadText(){
         // text
        al_init_font_addon(); // initialize the font addon
@@ -55,6 +56,7 @@ int loadText(){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
+       //Text to display
        al_draw_text(font, COLOUR, 145, 60, ALLEGRO_ALIGN_CENTRE, "Shirts");
        al_draw_text(font, COLOUR, 320, 60, ALLEGRO_ALIGN_CENTRE, "Pants");
        al_draw_text(font, COLOUR, 1581, 60, ALLEGRO_ALIGN_CENTRE, "Shoes");
@@ -63,17 +65,13 @@ int loadText(){
        al_flip_display();
 }
 
+//Function prints image based on a requested integer
 void printImage (int x, int y, int file){
     // declare and initialize image and display
     ALLEGRO_DISPLAY *display = nullptr;
     ALLEGRO_BITMAP *image = nullptr;
-
 	// assign file to image
-	if (file == 1){
-        image = al_load_bitmap("rainbow2.bmp");
-	} else if (file == 2){
-        image = al_load_bitmap("redshirt.png");
-    } else if (file == 3){
+    if (file == 3){
         image = al_load_bitmap("yellowsquare.png");
     } else if (file == 4){
         image = al_load_bitmap("background.png");
@@ -83,9 +81,6 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("loseScreen.png");
     } else if (file == 7){
         image = al_load_bitmap("winScreen.png");
-        // load squirrel
-    } else if (file == 8){
-        image = al_load_bitmap("finalSquirrel.png");
         //accessories
     } else if (file == 9){
         image = al_load_bitmap("blackHat.png");
@@ -151,9 +146,9 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("smallbrown.png");
         //shirt
     }   else if (file == 31){
-        //image = al_load_bitmap("tanktop.png");
+        image = al_load_bitmap("tanktop.png");
     }   else if (file == 32){
-        //image = al_load_bitmap("smalltanktop.png");
+        image = al_load_bitmap("smalltanktop.png");
     }   else if (file == 33){
         image = al_load_bitmap("iloveacorns.png");
     }   else if (file == 34){
@@ -166,15 +161,18 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("hawaii.png");
     }   else if (file == 38){
         image = al_load_bitmap("smallhawaii.png");
+    }   else if (file == 48){
+        image = al_load_bitmap("jacket.png");
+    }   else if (file == 49){
+        image = al_load_bitmap("smalljacket.png");
+        // load squirrel
+    } else if (file == 8){
+        image = al_load_bitmap("finalSquirrel.png");
     }
-
-
-  	// error message
+  	// error messages if image does not load properly
   	if (!image) {
         printf("%d ", file);
 		al_show_native_message_box(display, "Error", "Error", "Failed to load image 1!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-
-      	//al_destroy_display(display);
 	 }
 	// print image based on coordinates given
 	al_draw_bitmap(image, x, y, 0);
@@ -182,7 +180,7 @@ void printImage (int x, int y, int file){
 	al_flip_display();
 }
 
-//prints out the score to the screen
+//Function prints out the current score to the screen
 int printScore(int total){
         //print images of rectangles for the scores
        printImage(1920/2-410, 25, 3);
@@ -192,16 +190,17 @@ int printScore(int total){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
+       //Text to display
        al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
        al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
-       //print current score
+       //prints current score
        char str[10];
         sprintf(str, "%d", total);
        al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 }
 
-//print the highest score from the textfile
+//Function prints the highest score recorded onto the display
 int printHighScore(int high){
         //print images of rectangles for the scores
        printImage(1920/2-123, 25, 3);
@@ -211,32 +210,43 @@ int printHighScore(int high){
           al_show_native_message_box(display, "Error", "Error", "Could not load comic.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
+       //display text for high score and current score boxes
        al_draw_text(font, COLOUR, 1920/2-200, 25, ALLEGRO_ALIGN_CENTRE, "Current Score");
        al_draw_text(font, COLOUR, 1920/2+80, 25, ALLEGRO_ALIGN_CENTRE, "High Score");
-       //print current score
+       //prints highest score
        char str[10];
+       //converts score from int into a string for printing
         sprintf(str, "%d", high);
        al_draw_text(font, COLOUR, 1044, 73, ALLEGRO_ALIGN_CENTRE, str);
        al_flip_display();
 }
 
+//Function returns the high score
 int returnHighScore(int &highScore, int current){
+    //checks the high score to the current score
     if(current > highScore){
         highScore = current;
+        //returns new high score
         return highScore;
     }else{
+        //returns old high score
         return highScore;
     }
 }
 
+//Function prints the highscore into the textfile
 int printIntoFile(int &highScore){
+    //declare variable
     FILE *fptr;
+    //open file for writing
     fptr = fopen("scoreCheck.txt", "w");
+    //write high score into the file
     fprintf(fptr, "%d", highScore);
+    //close the file
     fclose(fptr);
 }
 
-// rectangle function (increase by 180)
+// Display rectangle function (increase by 180)
 void displayRectangles (){
     // For shirts
     for (int i = 0; i < 5; i ++){
@@ -258,12 +268,13 @@ void displayRectangles (){
     al_flip_display();
 }
 
-//calculates the score that is achieved by the player
+//Calculates the score that is achieved by the player
 int addScore(int &total, int shirt, int pants, int shoes, int acc){
     total = shirt + pants + shoes + acc;
     return total;
 }
 
+//Function sets the point value for each piece of clothing
 void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     //array for shirts
     for(int i = 0; i < 5; i++){
@@ -319,30 +330,33 @@ void clothingArrays(Pants p[], Shirt s[], Shoes sh[], Accessories ac[]){
     }
 }
 
+//Function reprints the game screen entirely after it is changed to a lose or win screen
 void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pantsC, bool &shoesC, bool &accC, int &highScore, int &totalScore){
-        shirtC = false;
-        pantsC = false;
-        shoesC = false;
-        accC = false;
-        A = 0;
-        P = 0;
-        Shi = 0;
-        Sho = 0;
-        printf ("yay");
-        loadGraphics();
-        printHighScore(returnHighScore(highScore, totalScore));
-        //scoreCheck (highScore);
-        //prints highscore into file
-        printIntoFile(highScore);
-        FILE *fptr;
-        totalScore = 0;
-        printScore(addScore(totalScore, Shi, P, Sho, A));
-        displayRectangles();
-        loadText ();
+    //declare and initialize variables
+    shirtC = false;
+    pantsC = false;
+    shoesC = false;
+    accC = false;
+    A = 0;
+    P = 0;
+    Shi = 0;
+    Sho = 0;
+    //Reload everything onto the display
+    loadGraphics();
+    printHighScore(returnHighScore(highScore, totalScore));
+    //Prints highscore into file
+    printIntoFile(highScore);
+    //reset the current score back to 0
+    totalScore = 0;
+    //Reload things back onto the display
+    printScore(addScore(totalScore, Shi, P, Sho, A));
+    displayRectangles();
+    loadText ();
 }
 
+//Function loads the start/instruction screen and allows user to continue the game by pressing any key on the keyboard.
 int printStart(bool &play){
-    // text
+    // Text addons to display text
     al_init_font_addon(); // initialize the font addon
     al_init_ttf_addon();// initialize the ttf (True Type Font) addon
     ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 23, 0);
@@ -350,108 +364,93 @@ int printStart(bool &play){
           al_show_native_message_box(display, "Error", "Error", "Could not load suparLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
+    //clear background to yellow colour
     al_clear_to_color(COLOUR);
     al_flip_display();
+    //Declare and initialize variables
     FILE *fptr;
     char str[200];
     int space = 80;
+    //open textfile
     fptr = fopen("instructions.txt", "r");
     if(fptr == nullptr){
         printf("file did not open");
     }
-    int counter = 0;
+    //reads from textfile
     while(fgets(str, 200, fptr) != nullptr){
-        counter++;
-    }
-    fclose(fptr);
-    fopen("instructions.txt", "r");
-
-    printf("%d\n", counter);
-    while(fgets(str, 200, fptr) != nullptr){
-            printf("%s\n", str);
-            al_draw_text(font, al_map_rgb(0, 0, 0), 1840/2 , space, ALLEGRO_ALIGN_CENTRE, str);
+            printf("%s\n", str); //prints to console to make sure file is reading
+            al_draw_text(font, al_map_rgb(0, 0, 0), 1840/2 , space, ALLEGRO_ALIGN_CENTRE, str); //prints to display
+            //displays two squirrel images
             printImage (20, 260, 8);
             printImage (1420, 260, 8);
+            //increment y axis of new line that is printed
             space += 50;
             al_flip_display();
             }
-    fclose(fptr);
+    fclose(fptr); // close text file
 
+    // create event queue
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
 
     // Initialize keyboard routines
 	if (!al_install_keyboard()) {
-	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!",
-                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
       	return -1;
    	}
    	// set up event queue
 	event_queue = al_create_event_queue();
 	if (!event_queue) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to create event_queue!",
-                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+		al_show_native_message_box(display, "Error", "Error", "Failed to create event_queue!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
 		al_destroy_display(display);
       	return -1;
 	}
-
 	// need to register events for our event queue
-	//al_register_event_source(event_queue, al_get_display_event_source(display));
  	al_register_event_source(event_queue, al_get_keyboard_event_source());
-
     ALLEGRO_EVENT ev;
     al_wait_for_event(event_queue, &ev);
-
+    //if user presses a key, game will continue to run
     if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-            if(ALLEGRO_KEY_0){
-               		play = true;
-            }
+            play = true;
     }
-
 }
 
+//Function loads the ending screen and restart or end keyboard functions
 int printEnd(bool &again){
-    // text
+    // Text addons to display text
     al_init_font_addon(); // initialize the font addon
-    al_init_ttf_addon();// initialize the ttf (True Type Font) addon
-    ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 23, 0);
+    al_init_ttf_addon(); // initialize the ttf (True Type Font) addon
+    ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 23, 0); //load font
        if (!font){
           al_show_native_message_box(display, "Error", "Error", "Could not load suparLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
           return -1;
        }
     //print win image
     printImage (0,0,7);
-    al_flip_display();
+    //Initialize and declare variables
     FILE *fptr;
     char str[200];
     int space = 550;
+    //open file
     fptr = fopen("windoc.txt", "r");
     if(fptr == nullptr){
         printf("file did not open");
     }
-    int counter = 0;
-    while(fgets(str, 200, fptr) != nullptr){
-        counter++;
-    }
-    fclose(fptr);
-    fopen("windoc.txt", "r");
-
-    printf("%d\n", counter);
+    //reads from textfile
     while(fgets(str, 200, fptr) != nullptr){
             printf("%s\n", str);
+            //displays text onto screen
             al_draw_text(font, al_map_rgb(0, 0, 0), 1200 , space, ALLEGRO_ALIGN_CENTRE, str);
-            //printImage (20, 260, 8);
-            //printImage (1420, 260, 8);
+            //increments the space (y coordinate) between the lines
             space += 50;
             al_flip_display();
             }
+    //close textfile
     fclose(fptr);
-
+    //Initialize event queue
     ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-
     // Initialize keyboard routines
 	if (!al_install_keyboard()) {
-	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!",
-                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
       	return -1;
    	}
    	// set up event queue
@@ -462,20 +461,22 @@ int printEnd(bool &again){
 		al_destroy_display(display);
       	return -1;
 	}
-
 	// need to register events for our event queue
-	//al_register_event_source(event_queue, al_get_display_event_source(display));
  	al_register_event_source(event_queue, al_get_keyboard_event_source());
-
     ALLEGRO_EVENT ev;
     al_wait_for_event(event_queue, &ev);
-
+    //Switch statement to determine what happens
+    //If user chooses 0, game continues. If user chooses 1, game ends.
     if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
-            if(ALLEGRO_KEY_0){
-                again = true;
-            }else if(ALLEGRO_KEY_1){
-                al_destroy_display(display);
-                again = false;
-            }
+         	switch(ev.keyboard.keycode) {
+            	case ALLEGRO_KEY_0:
+               		again = true;
+                    printf("pressed 0");
+               		break;
+	            case ALLEGRO_KEY_1:
+    		        printf("pressed 1");
+                    again = false;
+            		break;
+         	}
     }
 }
