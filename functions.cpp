@@ -17,7 +17,7 @@ void loadGraphics(){
     printImage (0, 0, 4);
 
     //print shirt column
-    printImage (95, 160 , 32); //tank top
+    //printImage (95, 160 , 32); //tank top
     printImage (95, 340, 34); //i love acorns
     printImage (95, 515, 36); //i love acorns
     printImage (95, 700, 38); //i love acorns
@@ -115,11 +115,11 @@ void printImage (int x, int y, int file){
     }   else if (file == 40){
         image = al_load_bitmap("greenPant.png");
     }   else if (file == 41){
-        image = al_load_bitmap("SmallgreenPant.png");
+        image = al_load_bitmap("smallgreenPant.png");
     }   else if (file == 42){
         image = al_load_bitmap("flowerpant.png");
     }   else if (file == 43){
-        image = al_load_bitmap("Smallflowerpant.png");
+        image = al_load_bitmap("smallflowerpant.png");
     }   else if (file == 44){
         image = al_load_bitmap("cargopant.png");
     }   else if (file == 45){
@@ -151,9 +151,9 @@ void printImage (int x, int y, int file){
         image = al_load_bitmap("smallbrown.png");
         //shirt
     }   else if (file == 31){
-        image = al_load_bitmap("tanktop.png");
+        //image = al_load_bitmap("tanktop.png");
     }   else if (file == 32){
-        image = al_load_bitmap("smalltanktop.png");
+        //image = al_load_bitmap("smalltanktop.png");
     }   else if (file == 33){
         image = al_load_bitmap("iloveacorns.png");
     }   else if (file == 34){
@@ -171,8 +171,10 @@ void printImage (int x, int y, int file){
 
   	// error message
   	if (!image) {
-		al_show_native_message_box(display, "Error", "Error", "Failed to load image!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-      	al_destroy_display(display);
+        printf("%d ", file);
+		al_show_native_message_box(display, "Error", "Error", "Failed to load image 1!", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+
+      	//al_destroy_display(display);
 	 }
 	// print image based on coordinates given
 	al_draw_bitmap(image, x, y, 0);
@@ -339,21 +341,141 @@ void reprintScreen(int &A, int &P, int &Shi, int &Sho, bool &shirtC, bool &pants
         loadText ();
 }
 
-void printStart(){
+int printStart(bool &play){
+    // text
+    al_init_font_addon(); // initialize the font addon
+    al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+    ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 23, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load suparLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
     al_clear_to_color(COLOUR);
     al_flip_display();
     FILE *fptr;
-    fptr = fopen("instructions.txt", "r");
     char str[200];
-    fscanf(fptr, "s", str);
-    while(fscanf(fptr, "s", str) != nullptr){
-        if(strcmp(fscanf(fptr, "s", str), "\n"){
-           }
+    int space = 80;
+    fptr = fopen("instructions.txt", "r");
+    if(fptr == nullptr){
+        printf("file did not open");
     }
-    
-    sprintf(str, "%d", total);
-    al_draw_text(font, COLOUR, 1920/2-203, 73, ALLEGRO_ALIGN_CENTRE, str);
-    
+    int counter = 0;
+    while(fgets(str, 200, fptr) != nullptr){
+        counter++;
+    }
     fclose(fptr);
-    
+    fopen("instructions.txt", "r");
+
+    printf("%d\n", counter);
+    while(fgets(str, 200, fptr) != nullptr){
+            printf("%s\n", str);
+            al_draw_text(font, al_map_rgb(0, 0, 0), 1840/2 , space, ALLEGRO_ALIGN_CENTRE, str);
+            printImage (20, 260, 8);
+            printImage (1420, 260, 8);
+            space += 50;
+            al_flip_display();
+            }
+    fclose(fptr);
+
+    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
+
+    // Initialize keyboard routines
+	if (!al_install_keyboard()) {
+	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+      	return -1;
+   	}
+   	// set up event queue
+	event_queue = al_create_event_queue();
+	if (!event_queue) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to create event_queue!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+		al_destroy_display(display);
+      	return -1;
+	}
+
+	// need to register events for our event queue
+	//al_register_event_source(event_queue, al_get_display_event_source(display));
+ 	al_register_event_source(event_queue, al_get_keyboard_event_source());
+
+    ALLEGRO_EVENT ev;
+    al_wait_for_event(event_queue, &ev);
+
+    if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+            if(ALLEGRO_KEY_0){
+               		play = true;
+            }
+    }
+
+}
+
+int printEnd(bool &again){
+    // text
+    al_init_font_addon(); // initialize the font addon
+    al_init_ttf_addon();// initialize the ttf (True Type Font) addon
+    ALLEGRO_FONT *font = al_load_ttf_font("superLarky.ttf", 23, 0);
+       if (!font){
+          al_show_native_message_box(display, "Error", "Error", "Could not load suparLarky.ttf", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+          return -1;
+       }
+    //print win image
+    printImage (0,0,7);
+    al_flip_display();
+    FILE *fptr;
+    char str[200];
+    int space = 550;
+    fptr = fopen("windoc.txt", "r");
+    if(fptr == nullptr){
+        printf("file did not open");
+    }
+    int counter = 0;
+    while(fgets(str, 200, fptr) != nullptr){
+        counter++;
+    }
+    fclose(fptr);
+    fopen("windoc.txt", "r");
+
+    printf("%d\n", counter);
+    while(fgets(str, 200, fptr) != nullptr){
+            printf("%s\n", str);
+            al_draw_text(font, al_map_rgb(0, 0, 0), 1200 , space, ALLEGRO_ALIGN_CENTRE, str);
+            //printImage (20, 260, 8);
+            //printImage (1420, 260, 8);
+            space += 50;
+            al_flip_display();
+            }
+    fclose(fptr);
+
+    ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
+
+    // Initialize keyboard routines
+	if (!al_install_keyboard()) {
+	    al_show_native_message_box(display, "Error", "Error", "failed to initialize the keyboard!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+      	return -1;
+   	}
+   	// set up event queue
+	event_queue = al_create_event_queue();
+	if (!event_queue) {
+		al_show_native_message_box(display, "Error", "Error", "Failed to create event_queue!",
+                                 nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+		al_destroy_display(display);
+      	return -1;
+	}
+
+	// need to register events for our event queue
+	//al_register_event_source(event_queue, al_get_display_event_source(display));
+ 	al_register_event_source(event_queue, al_get_keyboard_event_source());
+
+    ALLEGRO_EVENT ev;
+    al_wait_for_event(event_queue, &ev);
+
+    if (ev.type == ALLEGRO_EVENT_KEY_DOWN) {
+            if(ALLEGRO_KEY_0){
+                again = true;
+            }else if(ALLEGRO_KEY_1){
+                al_destroy_display(display);
+                again = false;
+            }
+    }
 }
