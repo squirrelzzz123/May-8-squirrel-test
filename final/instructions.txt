@@ -1,0 +1,15 @@
+Welcome to Swaggy Squirrel!!!
+You get to dress up the squirrel.
+
+RULES:
+You can select one article of clothing from each column.
+Once an item is selected from each column, the squirrel will judge the outfit.
+
+Points are based on how much the squirrel likes the pieces. 
+
+Try your best to impress the squirrel.
+Press ANY KEY to continue...
+
+Button functions:
+-RESTART will allow you to restart 
+without getting judged by the squirrel
